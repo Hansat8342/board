@@ -13,6 +13,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.zaxxer.hikari.HikariDataSource;
 
 import jmp.spring.mapper.BoardMapper;
+import jmp.spring.service.BoardService;
+import jmp.spring.vo.BoardVO;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
@@ -31,10 +33,41 @@ public class OJDBCTest {
 	@Autowired
 	BoardMapper mapper;
 	
+	@Autowired
+	BoardService service;
+	
+	@Autowired
+	BoardMapper BMapper;
+	
+	/*
+	 * 작성자 :
+	 * 작성일 :
+	 * 변환값 :
+	 */
+	
+	@Test
+	public void BMapper() {
+		BoardVO vo = new BoardVO();
+		vo.setContent("내용 - mapperTest");
+		vo.setTitle("제목 - mapperTest");
+		vo.setWriter("작성자 - mapperTest");
+		
+		int res = BMapper.insertBoard(vo);
+		
+//		log.info("mapper.insert.test======="+res);
+		log.info("service.insertBoard"+service.insertBoard(vo));
+	}
+	
+	@Test
+	public void service() {
+		log.info("service======"+service.getList());
+	}
+	
 	@Test
 	public void mapper() {
-		log.info("====="+mapper.getTime());
-		log.info("====="+mapper.getTime2());
+		log.info(mapper.getList());
+//		log.info("====="+mapper.getTime());
+//		log.info("====="+mapper.getTime2());
 	}
 	
 	@Test

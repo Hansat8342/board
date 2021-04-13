@@ -11,8 +11,10 @@ public interface BoardMapper {
 	@Select("select sysdate from dual")
 	public String getTime();
 	
-	public String getTime2();
+	public String getTime2(); 
 	
-	@Select("select * from tbl_board where bno>0")
+	//이중 셀렉트 주의 매퍼.xml에서 이미 셀렉트 해주고 있음.
 	public List <BoardVO> getList();
+	
+	public int insertBoard(BoardVO vo);
 }
