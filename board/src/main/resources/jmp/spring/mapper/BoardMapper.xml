@@ -14,7 +14,13 @@
   </select>
   
   <insert id="insertBoard">
+  
+  	<selectKey keyProperty="bno" order="BEFORE" resultType="int">
+  		select seq_board.nextval from dual
+  	</selectKey>
+  	
   	insert into tbl_board(bno,title,content,writer,regdate)
-		values(seq_board.nextval,'제목','내용','작성자',sysdate)
+		values(#{bno},#{title},#{content},#{writer},sysdate)
   </insert>
+  
 </mapper>
