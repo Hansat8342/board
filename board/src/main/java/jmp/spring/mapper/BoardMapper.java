@@ -17,4 +17,9 @@ public interface BoardMapper {
 	public List <BoardVO> getList();
 	
 	public int insertBoard(BoardVO vo);
+	
+	public BoardVO get(int bno);
+	
+	//업데이트 인서트 딜리트 = 인트 반환
+	public int update(BoardVO vo);
 }

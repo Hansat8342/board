@@ -20,7 +20,16 @@
   	</selectKey>
   	
   	insert into tbl_board(bno,title,content,writer,regdate)
-		values(#{bno},#{title},#{content},#{writer},sysdate)
+		values(#{bno},#{title},#{content},#{writer},sysdate)<!-- 파라메터 가져오는것 -->
   </insert>
   
+  <select id="get" resultType="jmp.spring.vo.BoardVO">
+	select * from tbl_board where bno=#{bno}
+  </select>
+  
+  <update id="update">
+  	update tbl_board
+  	set title=#{title}, content=#{content}, writer=#{writer}, updatedate=sysdate
+  	where bno=#{bno}
+  </update>
 </mapper>

@@ -41,4 +41,10 @@ public class BoardController {
 		rttr.addFlashAttribute("resMsg", vo.getBno()+"번 게시글이 등록 되었습니다.");
 		return "redirect:/board/list";
 	}
+	
+	@GetMapping({"/board/get", "/board/edit"})
+	public void boardGet(BoardVO vo, Model model) {
+		//상세정보 조회 , 모델에 담아서 화면에 전달
+		model.addAttribute("vo",service.get(vo.getBno()));
+	}
 }

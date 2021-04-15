@@ -46,6 +46,32 @@ public class OJDBCTest {
 	 */
 	
 	@Test
+	public void updateMapper() {
+		BoardVO vo = new BoardVO();
+		vo.setBno(3);
+		vo.setContent("내용 - update mapperTest");
+		vo.setTitle("제목 - update mapperTest");
+		vo.setWriter("작성자 - update mapperTest");
+		
+		int res = mapper.update(vo);
+		
+		log.info("update test"+res);
+	}
+	
+	@Test
+	public void getService() {
+		BoardVO vo = service.get(3);
+		log.info(vo);
+	}
+	
+	@Test
+	public void get() {
+		BoardVO vo = mapper.get(3);
+		
+		log.info(vo);
+	}
+	
+	@Test
 	public void BMapper() {
 		BoardVO vo = new BoardVO();
 		vo.setContent("내용 - mapperTest");

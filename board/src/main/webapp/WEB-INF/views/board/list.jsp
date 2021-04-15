@@ -9,10 +9,21 @@
 <style type="text/css">
 h1{text-align:center;}
 table{
+	border:3px double #7F9DB9;
 	margin:auto;
 	height:60%;
 	width:60%;
+}
+td:nth-child(2n-1) {
+  background-color : #ccff99
+}
+td:nth-child(2n) {
+  background-color : #66cc00
+}
+div{
 	margin:auto;
+	height:30px;
+	width:30px;
 }
 </style>
 </head>
@@ -24,7 +35,6 @@ if(msg!=''){
 }
 </script>
 <h1>게시판</h1>
-
 	<table border=1>
 		<!-- jstl 태그 라이브러리 사용하여 목록 작성 -->
 		<c:forEach items="${list }" var="list"><!-- c:forEach 는 리스트를 반복해서 가져오는 태그 -->
@@ -36,5 +46,8 @@ if(msg!=''){
 		</tr>
 		</c:forEach>
 	</table>
+	<div>
+		<p><input type="button" onclick="location.href='register'" value="글쓰기"></p>
+	</div>
 </body>
 </html>

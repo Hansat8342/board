@@ -26,5 +26,5 @@
 	
 	<mybatis-spring:scan base-package="jmp.spring.mapper"/><!-- 네임스페이스에 마이바티스 스프링을 체크해야 나옴 -->
 	
-	<context:component-scan base-package="jmp.spring.service"/>
+	<context:component-scan base-package="jmp.spring.service"></context:component-scan>
 </beans>
