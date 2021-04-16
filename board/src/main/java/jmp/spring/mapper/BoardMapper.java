@@ -22,4 +22,6 @@ public interface BoardMapper {
 	
 	//업데이트 인서트 딜리트 = 인트 반환
 	public int update(BoardVO vo);
+	
+	public int delete(int bno);
 }

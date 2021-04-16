@@ -24,7 +24,7 @@ p{
 </head>
 <body>
 	<h1>게시글 수정</h1>
-	<form method="post" action="/board/register">
+	<form method="post" action="/board/edit">
 		<input type=text name=bno value="${vo.bno}">
 		<div>
 			<p>제목 : <input type="text" name="title" value="${vo.title }">

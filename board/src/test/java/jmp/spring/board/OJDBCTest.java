@@ -46,6 +46,13 @@ public class OJDBCTest {
 	 */
 	
 	@Test
+	public void deleteMapper() {
+		int res = mapper.delete(3);
+		
+		System.out.println("======="+res);
+	}
+	
+	@Test
 	public void updateMapper() {
 		BoardVO vo = new BoardVO();
 		vo.setBno(3);

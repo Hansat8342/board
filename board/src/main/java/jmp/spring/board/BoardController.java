@@ -47,4 +47,42 @@ public class BoardController {
 		//상세정보 조회 , 모델에 담아서 화면에 전달
 		model.addAttribute("vo",service.get(vo.getBno()));
 	}
+	
+	@PostMapping("/board/edit")
+	public String editEXe(BoardVO vo, RedirectAttributes rttr) {
+		
+		int res = service.update(vo);
+		String resMsg="";
+		
+		if(res>0) {
+			resMsg="수정 되었습니다.";
+		}else {
+			resMsg="수정 작업에 실패 했습니다. 관리자에게 문의해 주세요.";
+		}
+		
+		rttr.addAttribute("bno",vo.getBno()); // 상세보기를 위한 bno 파라메터 처리
+		rttr.addFlashAttribute("resMsg",resMsg);
+		return "redirect:/board/get";
+	}
+	
+	@GetMapping("/board/delete")
+	public String delete(BoardVO vo, RedirectAttributes rttr) {
+		
+		//삭제처리
+		int res = service.delete(vo.getBno());
+		String resMsg = "";
+		//삭제 성공 -> 리스트
+		if(res>0) {
+			resMsg=vo.getBno()+"번 게시글이 삭제 되었습니다.";
+			rttr.addFlashAttribute("resMsg",resMsg);
+			return "redirect:/board/list";			
+		}else {
+			//삭제 실패 -> 상세화면
+			resMsg="게시글 삭제 처리에 실패 했습니다.";
+			rttr.addFlashAttribute("resMsg",resMsg);
+			rttr.addAttribute("bno",vo.getBno());
+			return "redirect:/board/get";
+		}
+		
+	}
 }
