@@ -9,6 +9,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jmp.spring.service.BoardService;
 import jmp.spring.vo.BoardVO;
+import jmp.spring.vo.Criteria;
+import jmp.spring.vo.PageNavi;
 import lombok.extern.log4j.Log4j;
 
 @Controller
@@ -19,16 +21,20 @@ public class BoardController {
 	BoardService service;
 	
 	@GetMapping("/board/list") 
-	public void getList(Model model) { //반횐되는게 없으면 저장된 주소를 반환
-		
-		model.addAttribute("list", service.getList());
+	public String getList(Criteria cri, Model model) { //반횐되는게 없으면 저장된 주소를 반환
+		model.addAttribute("list", service.getList(cri)); //파라메터는 컨트롤러가 수집
+		model.addAttribute("pageNavi", new PageNavi(cri, service.getTotal()));
 		log.info("getList()===");
+		
+		return "/board/list_b";
 	}
 	
 	// 등록페이지
 	@GetMapping("/board/register")
-	public void Insert() {
+	public String Insert() {
 		log.info("=========insert");
+		
+		return "/board/register_b";
 	}
 	
 	// 등록한 게시글이 확인을 받고 등록되는 프로세스
@@ -42,10 +48,19 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
-	@GetMapping({"/board/get", "/board/edit"})
-	public void boardGet(BoardVO vo, Model model) {
+	@GetMapping({"/board/get"})
+	public String boardGet(BoardVO vo, Model model) {
 		//상세정보 조회 , 모델에 담아서 화면에 전달
 		model.addAttribute("vo",service.get(vo.getBno()));
+		
+		return "/board/get_b";
+	}
+	@GetMapping({"/board/edit"})
+	public String boardEdit(BoardVO vo, Model model) {
+		//상세정보 조회 , 모델에 담아서 화면에 전달
+		model.addAttribute("vo",service.get(vo.getBno()));
+		
+		return "/board/edit_b";
 	}
 	
 	@PostMapping("/board/edit")

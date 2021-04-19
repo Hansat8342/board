@@ -6,26 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판</title>
-<style type="text/css">
-h1{text-align:center;}
-table{
-	border:3px double #7F9DB9;
-	margin:auto;
-	height:60%;
-	width:60%;
-}
-td:nth-child(2n-1) {
-  background-color : #ccff99
-}
-td:nth-child(2n) {
-  background-color : #66cc00
-}
-div{
-	margin:auto;
-	height:30px;
-	width:30px;
-}
-</style>
 </head>
 <body>
 <script type="text/javascript">

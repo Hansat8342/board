@@ -3,6 +3,7 @@ package jmp.spring.board;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +16,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import jmp.spring.mapper.BoardMapper;
 import jmp.spring.service.BoardService;
 import jmp.spring.vo.BoardVO;
+import jmp.spring.vo.Criteria;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
@@ -44,6 +46,19 @@ public class OJDBCTest {
 	 * 작성일 :
 	 * 변환값 :
 	 */
+	
+	@Test
+	public void getTotal() {
+		log.info(service.getTotal());
+	}
+	
+	@Test
+	public void getList() {
+		Criteria cri = new Criteria();
+		
+		List<BoardVO> list = service.getList(cri);
+		log.info("page===========list"+list);
+	}
 	
 	@Test
 	public void deleteMapper() {
@@ -93,12 +108,12 @@ public class OJDBCTest {
 	
 	@Test
 	public void service() {
-		log.info("service======"+service.getList());
+		//log.info("service======"+service.getList());
 	}
 	
 	@Test
 	public void mapper() {
-		log.info(mapper.getList());
+//		log.info(mapper.getList());
 //		log.info("====="+mapper.getTime());
 //		log.info("====="+mapper.getTime2());
 	}
