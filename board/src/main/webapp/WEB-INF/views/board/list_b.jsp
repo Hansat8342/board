@@ -49,16 +49,16 @@ if(msg!=''){
                             <button type="button" class="btn btn-default" onclick="location.href='register'">글쓰기</button>
                             <nav aria-label="Page navigation example">
 							  <ul class="pagination justify-content-center">
-							    <li class="page-item disabled">
-                            		<c:if test="${pageNavi.prev }"><a href="${pageNavi.startPage -1 }">이전</a></c:if>
+							    <li class="page-item">
+                            		<c:if test="${pageNavi.prev }"><a href="/board/list?pageNo=${pageNavi.startPage -1 }">이전</a></c:if>
 							    </li>
 							    <li class="page-item">
 		                            <c:forEach begin="${pageNavi.startPage }" end="${pageNavi.endPage }" var="page">
-		                            	<a href="${page}"> ${page} </a>
+		                            	<a href="/board/list?pageNo=${page}"> ${page} </a>
 		                            </c:forEach>
                             	</li>
 							    <li class="page-item">
-                            		<c:if test="${pageNavi.next }"><a href="${pageNavi.endPage +1 }">다음</a></c:if>
+                            		<c:if test="${pageNavi.next }"><a href="/board/list?pageNo=${pageNavi.endPage +1 }">다음</a></c:if>
 							    </li>
 							  </ul>
 							</nav>
