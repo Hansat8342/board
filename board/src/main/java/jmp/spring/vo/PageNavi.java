@@ -8,6 +8,7 @@ public class PageNavi {
 	int endPage;
 	boolean prev;
 	boolean next;
+	Criteria cri;
 	
 	public PageNavi(Criteria cri, int total) {
 		endPage = (int)Math.ceil((cri.getPageNo()/10.0))*10;

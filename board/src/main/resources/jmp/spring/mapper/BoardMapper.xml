@@ -10,13 +10,38 @@
   
   <!-- 보드 리스트 조회 -->
   <select id="getList" resultType="jmp.spring.vo.BoardVO">
-  	select * from(
-	select row_number() over (ORDER by bno desc) row_num, tbl.* from tbl_board tbl)
+  		select * from(
+	select row_number() over (ORDER by bno desc) row_num, tbl.* from tbl_board tbl
+	where 1=1
+	<!-- 조건은 잇을수도 잇고 없을수도 있음
+	검색조건의 타입과 키워드 값에 의해 생성이 될 수도 안될수도 있음. -->
+	<if test="type=='title' and keyword != ''">
+	and title like '%' || #{keyword} || '%'
+	</if>
+	<if test="type=='content' and keyword != ''">
+	and content like '%' || #{keyword} || '%'
+	</if>
+	<if test="type=='writer' and keyword != ''">
+	and writer like '%' || #{keyword} || '%'
+	</if>
+	)
 	where row_num BETWEEN #{pageNo} * #{amount} - 9 and #{pageNo} * #{amount}
   </select>
   
   <select id="getTotal" resultType="int">
   	select count(*) from tbl_board
+  	where 1=1
+	<!-- 조건은 잇을수도 잇고 없을수도 있음
+	검색조건의 타입과 키워드 값에 의해 생성이 될 수도 안될수도 있음. -->
+	<if test="type=='title' and keyword != ''">
+	and title like '%' || #{keyword} || '%'
+	</if>
+	<if test="type=='content' and keyword != ''">
+	and content like '%' || #{keyword} || '%'
+	</if>
+	<if test="type=='writer' and keyword != ''">
+	and writer like '%' || #{keyword} || '%'
+	</if>
   </select>
   
   <insert id="insertBoard">

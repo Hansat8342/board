@@ -6,6 +6,20 @@ var msg = '${resMsg}'
 if(msg!=''){
 	alert(msg)
 }
+
+// 페이지로 이동
+function page(page){
+	document.listForm.action="/board/list";
+	document.listForm.pageNo.value=page;
+	document.listForm.submit();
+}
+
+//상세보기 이동
+function detail(bno){
+	document.listForm.action="/board/get";
+	document.listForm.bno.value=bno;
+	document.listForm.submit();
+}
 </script>
 <jsp:include page="/resources/header/header.jsp"/>
         <div id="page-wrapper">
@@ -24,7 +38,7 @@ if(msg!=''){
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <table width="100%" class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>번호</th>
@@ -36,10 +50,10 @@ if(msg!=''){
                                 <tbody>
                                 <c:forEach items="${list }" var="vo">
                                     <tr class="odd gradeX">
-                                        <td><c:out value="${vo.bno }"/></td>
-                                        <td><a href="/board/get?bno=${vo.bno }"><c:out value="${vo.title }"/></a></td>
-										<td><c:out value="${vo.writer }"/></td>
-										<td class="center"><c:out value="${vo.regdate }"/></td>
+                                        <td>${vo.bno }</td>
+                                        <td onClick="detail(${vo.bno })"><a href="#">${vo.title }</a></td>
+										<td>${vo.writer }</td>
+										<td class="center">${vo.regdate }</td>
                                     </tr>
 								</c:forEach>
                                     
@@ -62,6 +76,26 @@ if(msg!=''){
 							    </li>
 							  </ul>
 							</nav>
+							<!-- 페이징 처리 끝 -->
+														
+							<form method="get" action="/board/list" name="listForm">
+							<div class="form-inline">
+                                <select class="form-control" name="type">
+                                
+                               
+                                    <option value="title" <c:if test="${pageNavi.cri.type == 'title'}">selected</c:if>>제목</option>
+                                    <option value="content" <c:if test="${pageNavi.cri.type == 'content'}">selected</c:if>>내용</option>
+                                    <option value="writer" <c:if test="${pageNavi.cri.type == 'writer'}">selected</c:if>>작성자</option>
+                                </select>
+                            <!-- 상세보기 검색 유지용 -->
+                            <input type="text" name="bno">
+                            <input type="text" name="pageNo" value=${pageNavi.cri.pageNo }>
+                            
+                            <input type="text" class="form-control" name="keyword" value=${pageNavi.cri.keyword }>
+                            <button type="submit" class="btn btn-default">검색</button>
+                            </div>
+							</form>
+							
                         </div>
                         <!-- /.panel-body -->
                     </div>

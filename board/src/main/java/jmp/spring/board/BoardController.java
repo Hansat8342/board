@@ -23,7 +23,7 @@ public class BoardController {
 	@GetMapping("/board/list") 
 	public String getList(Criteria cri, Model model) { //반횐되는게 없으면 저장된 주소를 반환
 		model.addAttribute("list", service.getList(cri)); //파라메터는 컨트롤러가 수집
-		model.addAttribute("pageNavi", new PageNavi(cri, service.getTotal()));
+		model.addAttribute("pageNavi", new PageNavi(cri, service.getTotal(cri)));
 		log.info("getList()===");
 		
 		return "/board/list_b";
