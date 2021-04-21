@@ -6,6 +6,12 @@ var msg = '${resMsg}'
 if(msg!=''){
 	alert(msg)
 }
+
+//상세보기 이동
+function detailBtn(url){
+	document.detailForm.action=url;
+	document.detailForm.submit();
+}
 </script>
 <jsp:include page="/resources/header/header.jsp"/>
         <div id="page-wrapper">
@@ -41,9 +47,16 @@ if(msg!=''){
                                 <input readonly class="form-control" value="${vo.regdate }">
                             </div>
                             <!-- /.table-responsive -->
-                            <button type="button" class="btn btn-default" onclick="location.href='edit?bno=${vo.bno}'">수정</button>
+                            <button type="button" onClick="detailBtn('/board/edit')" class="btn btn-default">수정</button>
                             <button type="button" class="btn btn-default" onclick="location.href='delete?bno=${vo.bno}'">삭제</button>
-                            <button type="button" class="btn btn-default" onclick="location.href='/board/list'">목록</button>
+                            <button type="button" class="btn btn-default" onclick="detailBtn('/board/list')">목록</button>
+                           
+                           <form method="get" name="detailForm">
+                           	<input type=hidden name=bno value=${vo.bno}>
+                           	<input type=hidden name=pageNo value=${criteria.pageNo }>
+                           	<input type=hidden name=type value=${criteria.type }>
+                           	<input type=hidden name=keyword value=${criteria.keyword }>
+                           </form>
                            
                         </div>
                         <!-- /.panel-body -->

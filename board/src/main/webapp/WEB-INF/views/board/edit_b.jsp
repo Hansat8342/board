@@ -40,6 +40,14 @@
                             </div>
                             <!-- /.table-responsive -->
                             <button type="submit" class="btn btn-default" onclick="location.href='edit?bno=${vo.bno}'">수정</button>
+                            <button type="button" class="btn btn-default" onclick="location.href='/board/list'">목록</button>
+                           
+                           <form method="get" name="detailForm">
+                           	<input type=hidden name=bno value=${vo.bno}>
+                           	<input type=hidden name=pageNo value=${criteria.pageNo }>
+                           	<input type=hidden name=type value=${criteria.type }>
+                           	<input type=hidden name=keyword value=${criteria.keyword }>
+                           </form>
                            
                         </div>
                         <!-- /.panel-body -->

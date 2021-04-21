@@ -20,6 +20,13 @@ function detail(bno){
 	document.listForm.bno.value=bno;
 	document.listForm.submit();
 }
+function enterkey() {
+    if (window.event.keyCode == 13) {
+
+         // 엔터키가 눌렸을 때 실행하는 반응
+         $("#form").submit();
+    }
+}
 </script>
 <jsp:include page="/resources/header/header.jsp"/>
         <div id="page-wrapper">
@@ -56,7 +63,15 @@ function detail(bno){
 										<td class="center">${vo.regdate }</td>
                                     </tr>
 								</c:forEach>
-                                    
+                                
+                                <c:if test="${list.size()==0 }">
+                                	<tr class="odd gradex">
+                                		<td colspan='4' style="text-align:center">
+                                			게시글이 존재하지 않습니다.
+                                		</td>
+                                	</tr>
+                                </c:if>
+                                
                                 </tbody>
                             </table>
                             <!-- /.table-responsive -->
@@ -76,7 +91,7 @@ function detail(bno){
 							    </li>
 							  </ul>
 							</nav>
-							<!-- 페이징 처리 끝 -->
+							<!-- 리스트 목록 -->
 														
 							<form method="get" action="/board/list" name="listForm">
 							<div class="form-inline">
@@ -88,11 +103,11 @@ function detail(bno){
                                     <option value="writer" <c:if test="${pageNavi.cri.type == 'writer'}">selected</c:if>>작성자</option>
                                 </select>
                             <!-- 상세보기 검색 유지용 -->
-                            <input type="text" name="bno">
-                            <input type="text" name="pageNo" value=${pageNavi.cri.pageNo }>
+                            <input type="hidden" name="bno">
+                            <input type="hidden" name="pageNo" value=${pageNavi.cri.pageNo }>
                             
-                            <input type="text" class="form-control" name="keyword" value=${pageNavi.cri.keyword }>
-                            <button type="submit" class="btn btn-default">검색</button>
+                            <input type="text" onkeyup="enterkey()" class="form-control" name="keyword" value=${pageNavi.cri.keyword } >
+                            <button type="button" onClick="page(1)" class="btn btn-default">검색</button>
                             </div>
 							</form>
 							

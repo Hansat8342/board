@@ -49,7 +49,7 @@ public class OJDBCTest {
 	
 	@Test
 	public void getTotal() {
-		log.info(service.getTotal());
+		//log.info(service.getTotal());
 	}
 	
 	@Test

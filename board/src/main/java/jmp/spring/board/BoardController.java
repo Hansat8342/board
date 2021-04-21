@@ -21,7 +21,7 @@ public class BoardController {
 	BoardService service;
 	
 	@GetMapping("/board/list") 
-	public String getList(Criteria cri, Model model) { //반횐되는게 없으면 저장된 주소를 반환
+	public String getList(Model model, Criteria cri) { //반횐되는게 없으면 저장된 주소를 반환
 		model.addAttribute("list", service.getList(cri)); //파라메터는 컨트롤러가 수집
 		model.addAttribute("pageNavi", new PageNavi(cri, service.getTotal(cri)));
 		log.info("getList()===");
@@ -49,14 +49,14 @@ public class BoardController {
 	}
 	
 	@GetMapping({"/board/get"})
-	public String boardGet(BoardVO vo, Model model) {
+	public String boardGet(Criteria cri, BoardVO vo, Model model) {
 		//상세정보 조회 , 모델에 담아서 화면에 전달
 		model.addAttribute("vo",service.get(vo.getBno()));
 		
 		return "/board/get_b";
 	}
 	@GetMapping({"/board/edit"})
-	public String boardEdit(BoardVO vo, Model model) {
+	public String boardEdit(Criteria cri, BoardVO vo, Model model) {
 		//상세정보 조회 , 모델에 담아서 화면에 전달
 		model.addAttribute("vo",service.get(vo.getBno()));
 		
@@ -64,7 +64,7 @@ public class BoardController {
 	}
 	
 	@PostMapping("/board/edit")
-	public String editEXe(BoardVO vo, RedirectAttributes rttr) {
+	public String editEXe(Criteria cri, BoardVO vo, RedirectAttributes rttr) {
 		
 		int res = service.update(vo);
 		String resMsg="";
@@ -75,13 +75,18 @@ public class BoardController {
 			resMsg="수정 작업에 실패 했습니다. 관리자에게 문의해 주세요.";
 		}
 		
-		rttr.addAttribute("bno",vo.getBno()); // 상세보기를 위한 bno 파라메터 처리
+		// 상세보기를 위한 bno 파라메터 처리
+		rttr.addAttribute("bno",vo.getBno());
+		rttr.addAttribute("pageNo",cri.getPageNo());
+		rttr.addAttribute("type",cri.getType());
+		rttr.addAttribute("keyword",cri.getKeyword());
+		
 		rttr.addFlashAttribute("resMsg",resMsg);
 		return "redirect:/board/get";
 	}
 	
 	@GetMapping("/board/delete")
-	public String delete(BoardVO vo, RedirectAttributes rttr) {
+	public String delete(Criteria cri, BoardVO vo, RedirectAttributes rttr) {
 		
 		//삭제처리
 		int res = service.delete(vo.getBno());
@@ -90,12 +95,20 @@ public class BoardController {
 		if(res>0) {
 			resMsg=vo.getBno()+"번 게시글이 삭제 되었습니다.";
 			rttr.addFlashAttribute("resMsg",resMsg);
+			rttr.addAttribute("pageNo",cri.getPageNo());
+			rttr.addAttribute("type",cri.getType());
+			rttr.addAttribute("keyword",cri.getKeyword());
+			
 			return "redirect:/board/list";			
 		}else {
 			//삭제 실패 -> 상세화면
 			resMsg="게시글 삭제 처리에 실패 했습니다.";
 			rttr.addFlashAttribute("resMsg",resMsg);
 			rttr.addAttribute("bno",vo.getBno());
+			rttr.addAttribute("pageNo",cri.getPageNo());
+			rttr.addAttribute("type",cri.getType());
+			rttr.addAttribute("keyword",cri.getKeyword());
+			
 			return "redirect:/board/get";
 		}
 		

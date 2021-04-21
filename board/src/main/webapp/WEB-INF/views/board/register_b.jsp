@@ -40,6 +40,7 @@
                             </div>
                             <!-- /.table-responsive -->
                             <button type="submit" class="btn btn-default">제출</button>
+                            <button type="button" class="btn btn-default" onclick="location.href='/board/list'">목록</button>
                            
                         </div>
                         <!-- /.panel-body -->
