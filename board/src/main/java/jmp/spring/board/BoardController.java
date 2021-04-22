@@ -20,6 +20,16 @@ public class BoardController {
 	@Autowired
 	BoardService service;
 	
+	@GetMapping("/board/RestTest")
+	public void getRestTest() {
+		
+	}
+	
+	@GetMapping("/board/reply")
+	public void getReply() {
+		
+	}
+	
 	@GetMapping("/board/list") 
 	public String getList(Model model, Criteria cri) { //반횐되는게 없으면 저장된 주소를 반환
 		model.addAttribute("list", service.getList(cri)); //파라메터는 컨트롤러가 수집

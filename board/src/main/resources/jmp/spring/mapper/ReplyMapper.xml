@@ -9,11 +9,11 @@
   		insert into tbl_reply values(seq_reply.nextval, #{bno}, #{reply}, #{replyer}, sysdate, sysdate)
   	</insert>
   	
-  	<select id="get" resultType="jmp.spring.vo.replyVo">
-  		select * from tbl_board where rno=#{rno}
+  	<select id="get" resultType="jmp.spring.vo.ReplyVo">
+  		select * from tbl_reply where rno=#{rno}
   	</select>
   	
-  	<select id="getList" resultType="jmp.spring.vo.replyVo">
+  	<select id="getList" resultType="jmp.spring.vo.ReplyVo">
   		select * from tbl_board where bno=#{bno}
   	</select>
   	
@@ -24,6 +24,6 @@
   	</update>
   	
   	<delete id="delete">
-  		delete tbl_reply where rno=#{rno};
+  		delete tbl_reply where rno=#{rno}
   	</delete>
   </mapper>
