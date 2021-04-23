@@ -24,4 +24,5 @@
 	<context:component-scan base-package="jmp.spring.board" />
 	<context:component-scan base-package="jmp.spring.controller" />
 	
+	
 </beans:beans>

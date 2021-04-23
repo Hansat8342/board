@@ -22,7 +22,7 @@ public class ReplyTest {
 	
 	@Test
 	public void mapperGetListTest() {
-		log.info(mapper.getList(222));
+		log.info(mapper.getList(1));
 	}
 	@Test
 	public void mapperGetTest() {

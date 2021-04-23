@@ -20,7 +20,7 @@ $(document).ready(function(){ // 페이지 초기화 작업
 
 function getAjaxList(){
 	$.ajax({
-		url:'/reply/list/222',
+		url:'/reply/list/1',
 		method:'get',
 		dataType:'json',
 		success:function(data, textStatus, jqXHR){
@@ -39,7 +39,7 @@ function getAjaxList(){
 			$("#repleTbl").html(tblContent);
 		},
 		error:function(jqXHR, textStatus, errorThrown){
-			console.log("textStatus",textStatus);
+			console.log("errorThrown",errorThrown);
 		}
 	})
 }

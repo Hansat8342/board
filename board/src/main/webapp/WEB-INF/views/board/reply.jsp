@@ -4,30 +4,41 @@
 
 <jsp:include page="/resources/header/header.jsp"/>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" 
-integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
+<script src="/resources/js/reply.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	
-	getAjaxList();
-	
-});
-
-function getAjaxList(){
-	
-	$.ajax({
-		url:'/reply/list/111',
-		method:'get',
-		dataType:'json',
-		success:function(data, status, xhr){
-			console.log("data",data)
-		},
-		error:function(xhr, status, error){
-			console.log("error",error)
-		}
+	//버튼을 클릭하면 모달창을 보여준다.
+	$("#addReplyBtn").on("click",function(){
+		$("#replyInsertBtn").show();
+		$("#reply").val(""); // 값 초기화
+		$("#replyer").val("");
+		$("#myModal").modal("show");
 	});
 	
+	//저장버튼을 클릭하면 저장하고 모달창을 닫아준다.
+	//모달창을 닫은후 리스트를 재 조회.
+	$("#replyInsertBtn").on("click",function(){
+		//리플 작성
+		AjaxInsert();
+		//여기서 모달창 닫기와 새로고침을 넣으면 인서트가 완료되기 전에 창을 닫고 새로고침을 해서 제대로 적용되지 않음(비동기)
+	});
+	
+	//리플 리스트 조회
+	getAjaxList();
+});
+
+function replyDetail(rno){
+	//선택된 rno 세팅
+	$("#rno").val(rno); 
+	//버튼 숨김처리
+	$("#replyInsertBtn").hide(); 
+	//모달창 보여주기
+	$("#myModal").modal("show"); 
+	//상세내용 조회
+	getAjax();
 }
 </script>
 
@@ -81,7 +92,8 @@ function getAjaxList(){
 							      <!-- /.panel .chat-panel -->
 							
 								<div class="panel-footer"></div>
-							
+							bno<input type="text" value="1" id="bno"><br>
+							rno<input type="text" id="rno"><br>
 							
 									</div>
 							  </div>
@@ -125,7 +137,7 @@ function getAjaxList(){
                            </div>
                            <div class="modal-footer">
                                <button type="button" class="btn btn-default" data-dismiss="modal">cancle</button>
-                               <button type="button" class="btn btn-primary">save</button>
+                               <button type="button" class="btn btn-primary" id="replyInsertBtn">save</button>
                            </div>
                        </div>
                        <!-- /.modal-content -->
