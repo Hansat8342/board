@@ -15,7 +15,15 @@ $(document).ready(function(){
 		$("#replyInsertBtn").show();
 		$("#reply").val(""); // 값 초기화
 		$("#replyer").val("");
-		$("#myModal").modal("show");
+		$("#myModal").modal("show"); // 모달창 보여줌
+	});
+	
+	$("#removeBtn").on("click", function(){
+		deleteAjax();
+	});
+	
+	$("#updateBtn").on("click",function(){
+		updateAjax();
 	});
 	
 	//저장버튼을 클릭하면 저장하고 모달창을 닫아준다.
@@ -28,17 +36,46 @@ $(document).ready(function(){
 	
 	//리플 리스트 조회
 	getAjaxList();
+	
 });
 
 function replyDetail(rno){
-	//선택된 rno 세팅
-	$("#rno").val(rno); 
-	//버튼 숨김처리
-	$("#replyInsertBtn").hide(); 
-	//모달창 보여주기
-	$("#myModal").modal("show"); 
+	// 선택된 rno세팅
+	$("#rno").val(rno);
+	
+	// 버튼 숨김 처리
+	$("#replyInsertBtn").hide();
+	// 모달창 보여주기
+	$("#myModal").modal("show");
+	
 	//상세내용 조회
 	getAjax();
+	
+};
+
+/*
+ * 리플 페이지 생성
+ */
+function replyPage(pagenavi){
+	var startpage = pageNavi.startPage;
+	var endPage = pageNavi.endPage;
+	// 이전 페이지 네비게이션으로 이동
+	if(pageNavi.prev){
+		pageContent += '<li class="page-item disabled">'
+	     +'<a class="page-link" href="#" tabindex="-1">Previous</a>'
+	     +'</li>';
+	}
+	pageContent="";
+	for(startPage;startPage<=endPage; startPage++){
+		pageContent += '<li class="page-item"><a class="page-link" href="#">'+startPage+'</a></li>'
+	}
+	//다음 페이지 네비게이션으로 이동
+	if(pageNavi.next){
+		
+	}
+	$(".pagination").html(pageContent);
+	
+	    
 }
 </script>
 
@@ -91,10 +128,17 @@ function replyDetail(rno){
 							      </div>
 							      <!-- /.panel .chat-panel -->
 							
-								<div class="panel-footer"></div>
-							bno<input type="text" value="1" id="bno"><br>
+								<div class="panel-footer">
+									<!-- 페이징 -->
+									<nav aria-label="...">
+										<ul class="pagination">
+										</ul>									
+									</nav>
+									<!-- 페이징 닫기 -->
+								</div>
+							bno<input type="text" value="111" id="bno"><br>
 							rno<input type="text" id="rno"><br>
-							
+							pageNo<input type="text" id="pageNo" value="1">
 									</div>
 							  </div>
 							  <!-- ./ end row -->
@@ -136,6 +180,8 @@ function replyDetail(rno){
 							</ul>
                            </div>
                            <div class="modal-footer">
+                           	   <button type="button" class="btn btn-warning" data-dismiss="modal" id="updateBtn">Modify</button>
+                           	   <button type="button" class="btn btn-default" data-dismiss="modal" id="removeBtn">Remove</button>
                                <button type="button" class="btn btn-default" data-dismiss="modal">cancle</button>
                                <button type="button" class="btn btn-primary" id="replyInsertBtn">save</button>
                            </div>

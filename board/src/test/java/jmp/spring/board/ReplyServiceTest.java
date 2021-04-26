@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import jmp.spring.mapper.ReplyMapper;
 import jmp.spring.service.ReplyService;
 import jmp.spring.vo.ReplyVo;
 import lombok.extern.log4j.Log4j;
@@ -17,8 +18,13 @@ public class ReplyServiceTest {
 	
 	@Autowired
 	ReplyService service;
+	@Autowired
+	ReplyMapper mapper;
 	
-	
+	@Test
+	public void getTotalTest() {
+		log.info("mapper"+mapper.getTotal(111));
+	}
 	
 	@Test
 	public void serviceGetListTest() {

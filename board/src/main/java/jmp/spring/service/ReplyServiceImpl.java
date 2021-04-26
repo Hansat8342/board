@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jmp.spring.mapper.ReplyMapper;
+import jmp.spring.vo.Criteria;
 import jmp.spring.vo.ReplyVo;
 
 @Service
@@ -42,6 +43,12 @@ public class ReplyServiceImpl implements ReplyService {
 	public List<ReplyVo> getList(int bno) {
 		// TODO Auto-generated method stub
 		return mapper.getList(bno);
+	}
+
+	@Override
+	public int getTotal(int bno) {
+		// TODO Auto-generated method stub
+		return mapper.getTotal(bno);
 	}
 
 }

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import jmp.spring.service.ReplyService;
+import jmp.spring.vo.Criteria;
+import jmp.spring.vo.PageNavi;
 import jmp.spring.vo.ReplyVo;
 import lombok.extern.log4j.Log4j;
 
@@ -22,6 +24,39 @@ public class ReplyController {
 	@Autowired
 	ReplyService service; 
 	
+	@PostMapping("/reply/update")
+	/*
+	 * 리플 업데이트
+	 * Json 형식으로 전달받은 데이터를 RepleVo에 넣어줍니다. 
+	 * @param vo
+	 * @return 업데이트 결과 map<String, String>
+	 */
+	public Map<String, String> update(@RequestBody ReplyVo vo) {
+		log.info("/reply/update 시작");
+		int res = service.update(vo);
+		
+		Map<String, String> map = new HashMap<String,String>();
+		if(res>0)
+			map.put("result", "success");
+		else
+			map.put("result", "fail");
+		return map;
+	}
+	
+	@GetMapping("/reply/delete/{rno}")
+	public Map<String, String> delete(@PathVariable("rno") int rno) {
+		int res = service.delete(rno);
+		
+		Map<String, String> map = new HashMap<String,String>();
+		
+		if(res>0)
+			map.put("result", "success");
+		else
+			map.put("result", "fail");
+		
+		return map;
+	}
+	
 	@GetMapping("/reply/get/{rno}")
 	public ReplyVo get(@PathVariable("rno") int rno) {
 		ReplyVo vo = service.get(rno);
@@ -29,13 +64,20 @@ public class ReplyController {
 		return vo;
 	}
 	
-	@GetMapping("/reply/list/{bno}")
-	public List<ReplyVo> getList(@PathVariable("bno") int bno) {
+	@GetMapping("/reply/list/{bno}/{pageNo}")
+	public Map<String, Object> getList(@PathVariable("bno") int bno, @PathVariable("pageNo") int pageNo) {
+		
+		Criteria cri = new Criteria(1,10);
+		PageNavi pageNavi = new PageNavi(cri, service.getTotal(bno));
 		List<ReplyVo> list = service.getList(bno);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pageNavi", pageNavi);
+		map.put("list", list);
 		
 		// 로그를 찍고 쿼리 확인하고 쿠커리를 디벨로퍼에서 따로 실행해보면 오류 확인 가능
 		log.info("======="+list);
-		return list;
+		return map;
 	}
 	
 	@PostMapping("/reply/insert")
