@@ -11,6 +11,6 @@ public interface ReplyService {
 	public int update(ReplyVo vo);
 	public int delete(int rno);
 	public ReplyVo get(int rno);
-	public List<ReplyVo> getList(int bno);
+	public List<ReplyVo> getList(int bno, Criteria cri);
 	public int getTotal(int bno);
 }

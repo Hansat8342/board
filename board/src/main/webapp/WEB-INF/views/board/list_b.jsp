@@ -96,8 +96,6 @@ function enterkey() {
 							<form method="get" action="/board/list" name="listForm">
 							<div class="form-inline">
                                 <select class="form-control" name="type">
-                                
-                               
                                     <option value="title" <c:if test="${pageNavi.cri.type == 'title'}">selected</c:if>>제목</option>
                                     <option value="content" <c:if test="${pageNavi.cri.type == 'content'}">selected</c:if>>내용</option>
                                     <option value="writer" <c:if test="${pageNavi.cri.type == 'writer'}">selected</c:if>>작성자</option>

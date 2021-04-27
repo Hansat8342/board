@@ -67,15 +67,20 @@ public class ReplyController {
 	@GetMapping("/reply/list/{bno}/{pageNo}")
 	public Map<String, Object> getList(@PathVariable("bno") int bno, @PathVariable("pageNo") int pageNo) {
 		
-		Criteria cri = new Criteria(1,10);
+		Criteria cri = new Criteria(pageNo,10);
 		PageNavi pageNavi = new PageNavi(cri, service.getTotal(bno));
-		List<ReplyVo> list = service.getList(bno);
+		
+		System.out.println("============================"+bno);
+		System.out.println("----------------------------"+pageNo);
+		System.out.println("----------------------------"+cri);
+		System.out.println("----------------------------"+pageNavi);
+		List<ReplyVo> list = service.getList(bno, cri);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("pageNavi", pageNavi);
+		//map.put("pageNavi", pageNavi);
 		map.put("list", list);
 		
-		// 로그를 찍고 쿼리 확인하고 쿠커리를 디벨로퍼에서 따로 실행해보면 오류 확인 가능
+		// 로그를 찍고 쿼리 확인하고 쿼리를 디벨로퍼에서 따로 실행해보면 오류 확인 가능
 		log.info("======="+list);
 		return map;
 	}

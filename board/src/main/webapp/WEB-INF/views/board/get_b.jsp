@@ -58,6 +58,8 @@ function detailBtn(url){
                            	<input type=hidden name=keyword value=${criteria.keyword }>
                            </form>
                            
+                           <!-- 댓글 인클루드 -->
+                           <jsp:include page="reply.jsp"></jsp:include>
                         </div>
                         <!-- /.panel-body -->
                     </div>

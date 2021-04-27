@@ -40,9 +40,9 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public List<ReplyVo> getList(int bno) {
+	public List<ReplyVo> getList(int bno, Criteria cri) {
 		// TODO Auto-generated method stub
-		return mapper.getList(bno);
+		return mapper.getList(bno, cri);
 	}
 
 	@Override

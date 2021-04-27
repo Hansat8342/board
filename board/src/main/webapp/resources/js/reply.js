@@ -5,12 +5,12 @@
 function getAjaxList(){
 	
 	$.ajax({
-		url:'/reply/list/'+ $("#bno").val() + '/' + $("#pageNo").val,
+		url:'/reply/list/'+ $("#bno").val() + '/' + $("#replypageNo").val(),
 		method:'get',
 		dataType:'json',
 		success:function(data, status, xhr){
 			console.log("data",data);
-			debugger;
+			//debugger; 작동중 여기서 멈추고 한단계씩 디버거
 			var htmlContent="";
 
 			//리스트에 데이터가 0건이면
@@ -82,6 +82,7 @@ function AjaxInsert(){
 				//모달창을 닫기
 				$("#myModal").modal("hide");
 				//리스트 재 조회, 펑션 호출
+				$("#replypageNo").val("1");
 				getAjaxList();
 			}else{
 				alert("입력중 오류가 발생했습니다.");
