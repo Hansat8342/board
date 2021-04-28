@@ -13,6 +13,7 @@ public interface ReplyMapper {
 	public int update(ReplyVo vo);
 	public int delete(int rno);
 	public ReplyVo get(int rno);
-	public List<ReplyVo> getList(@Param("bno") int bno, @Param("cri") Criteria cri);
+	public List<ReplyVo> getList(@Param("bno") int bno,
+								 @Param("cri") Criteria cri);
 	public int getTotal(int bno);
 }

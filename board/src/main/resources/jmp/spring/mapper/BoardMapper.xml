@@ -1,71 +1,79 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
 <mapper namespace="jmp.spring.mapper.BoardMapper">
-<!-- 데이터베이스와 연결되어 데이터베이스를 제어 및 동작 시키는 문서 -->
-  <!-- ; 을 붙이지 않아야 오류없이 텍스트 작동 -->
-  <select id="getTime2" resultType="String">
-    select sysdate from dual
-  </select>
-  
-  <!-- 보드 리스트 조회 -->
-  <select id="getList" resultType="jmp.spring.vo.BoardVO">
-  		select * from(
-	select row_number() over (ORDER by bno desc) row_num, tbl.* from tbl_board tbl
-	where 1=1
-	<!-- 조건은 잇을수도 잇고 없을수도 있음
-	검색조건의 타입과 키워드 값에 의해 생성이 될 수도 안될수도 있음. -->
-	<if test="type=='title' and keyword != ''">
-	and title like '%' || #{keyword} || '%'
-	</if>
-	<if test="type=='content' and keyword != ''">
-	and content like '%' || #{keyword} || '%'
-	</if>
-	<if test="type=='writer' and keyword != ''">
-	and writer like '%' || #{keyword} || '%'
-	</if>
-	)
-	where row_num BETWEEN #{pageNo} * #{amount} - 9 and #{pageNo} * #{amount}
-  </select>
-  
-  <select id="getTotal" resultType="int">
-  	select count(*) from tbl_board
-  	where 1=1
-	<!-- 조건은 잇을수도 잇고 없을수도 있음
-	검색조건의 타입과 키워드 값에 의해 생성이 될 수도 안될수도 있음. -->
-	<if test="type=='title' and keyword != ''">
-	and title like '%' || #{keyword} || '%'
-	</if>
-	<if test="type=='content' and keyword != ''">
-	and content like '%' || #{keyword} || '%'
-	</if>
-	<if test="type=='writer' and keyword != ''">
-	and writer like '%' || #{keyword} || '%'
-	</if>
-  </select>
-  
-  <insert id="insertBoard">
-  
-  	<selectKey keyProperty="bno" order="BEFORE" resultType="int">
-  		select seq_board.nextval from dual
-  	</selectKey>
-  	
-  	insert into tbl_board(bno,title,content,writer,regdate)
-		values(#{bno},#{title},#{content},#{writer},sysdate)<!-- 파라메터 가져오는것 -->
-  </insert>
-  
-  <select id="get" resultType="jmp.spring.vo.BoardVO">
-	select * from tbl_board where bno=#{bno}
-  </select>
-  
-  <update id="update">
-  	update tbl_board
-  	set title=#{title}, content=#{content}, writer=#{writer}, updatedate=sysdate
-  	where bno=#{bno}
-  </update>
-  
-  <delete id="delete" parameterType="int">
-  	delete from tbl_board where bno=#{bno}
-  </delete>
+
+	<select id="getTime2" resultType="String">
+		select sysdate from dual
+	</select>
+
+	<!-- 리스트 목록 조회 -->
+	<select id="getList" resultType="jmp.spring.vo.BoardVo">
+		select * 
+		from 
+		(    select ROW_NUMBER() OVER (ORDER BY bno desc) row_num
+		            , tbl.*
+		    from tbl_board tbl
+		    where 1=1
+		    <!-- 조건은 있을수도 있고 없을 수도 있음 
+		    검색조건의 타입과 키워드 값에 의해 생성이 될수도 있고 안될수도 있음-->
+		    <if test="type=='title' and keyword != ''">
+				and title like '%'  || #{keyword}  ||  '%'
+		    </if>
+		    <if test="type=='content' and keyword != ''">
+				and content like '%'  || #{keyword}  ||  '%'
+		    </if>
+		    <if test="type=='writer' and keyword != ''">
+				and writer like '%'  || #{keyword}  ||  '%'
+		    </if>
+		)
+		where row_num between #{pageNo} * #{amount}-9 and #{pageNo} * #{amount} 
+			
+	</select>
+	
+	<select id="getTotal" resultType="int">
+	select count(*) from tbl_board
+		where 1=1
+		    <!-- 조건은 있을수도 있고 없을 수도 있음 
+		    검색조건의 타입과 키워드 값에 의해 생성이 될수도 있고 안될수도 있음-->
+		    <if test="type=='title' and keyword != ''">
+				and title like '%'  || #{keyword}  ||  '%'
+		    </if>
+		    <if test="type=='content' and keyword != ''">
+				and content like '%'  || #{keyword}  ||  '%'
+		    </if>
+		    <if test="type=='writer' and keyword != ''">
+				and writer like '%'  || #{keyword}  ||  '%'
+		    </if>
+	</select>
+	
+	<insert id="insertBoard">
+	
+		<selectKey keyProperty="bno" resultType="int" order="BEFORE">
+			select SEQ_TBL_BOARD.nextval from dual
+		</selectKey>
+		
+		
+		insert into tbl_board (bno, title, content, writer, regdate)
+			values (#{bno}, #{title}, #{content}, #{writer}, sysdate)
+	</insert>
+	
+	<select id="get" resultType="jmp.spring.vo.BoardVo">
+		select * from tbl_board where bno=#{bno}
+	</select>
+	
+	<update id="update">
+		update tbl_board
+		set title=#{title}, content=#{content}, writer=#{writer}, updatedate=sysdate
+		where bno=#{bno}
+	
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from tbl_board where bno=#{bno}
+	</delete>
+	
 </mapper>

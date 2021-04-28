@@ -18,36 +18,47 @@ public class ReplyTest {
 	@Autowired
 	ReplyMapper mapper;
 	
-	
-	
 	@Test
 	public void mapperGetListTest() {
-		log.info(mapper.getList(1));
+		log.info("================="+mapper.getList(4));
 	}
+	
 	@Test
 	public void mapperGetTest() {
-		log.info(mapper.get(21));
+		log.info("================="+mapper.get(1));
 	}
-	@Test
-	public void mapperUpdateTest() {
-		ReplyVo vo = new ReplyVo();
-		vo.setRno(21);
-		vo.setReply("인서트 테스트3");
-		vo.setReplyer("길홍동");
-		
-		int res = mapper.update(vo);
-	}
-	@Test
-	public void mapperDeleteTest() {
-		int res = mapper.delete(3);
-	}
+	
 	@Test
 	public void mapperInsertTest() {
-		ReplyVo vo = new ReplyVo();
-		vo.setBno(111);
-		vo.setReply("인서트 테스트");
+		ReplyVo vo = new ReplyVo();  //vo값을 직접 넣어줘야 함 
+		vo.setBno(222);
+		vo.setReply("수고하세요");
 		vo.setReplyer("홍길동");
 		
 		int res = mapper.insert(vo);
+		
+		log.info("================="+res);
 	}
+	
+	@Test
+	public void mapperUpdateTest() {
+		ReplyVo vo = new ReplyVo();
+		vo.setRno(14);  //reply 기본키 rno를 sql에서 확인하기 (몇번 댓글을 바꿀지)
+		vo.setReply("고생하셨어요");
+		vo.setReplyer("길동이");
+		
+		int res = mapper.update(vo);
+		
+		log.info("================="+res);
+	}
+	
+	@Test
+	public void mapperDeleteTest() {
+		ReplyVo vo = new ReplyVo();
+		vo.setRno(1);
+		
+		int res = mapper.delete(1);
+		log.info("================="+res);
+	}
+	
 }

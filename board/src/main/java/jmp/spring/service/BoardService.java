@@ -2,18 +2,18 @@ package jmp.spring.service;
 
 import java.util.List;
 
-import jmp.spring.vo.BoardVO;
+import jmp.spring.vo.BoardVo;
 import jmp.spring.vo.Criteria;
 
 public interface BoardService {
 
-	public List<BoardVO> getList(Criteria cri);
+	public List<BoardVo> getList(Criteria cri);
 	
-	public int insertBoard(BoardVO vo);
+	public int insertBoard(BoardVo vo);
 	
-	public BoardVO get(int bno);
+	public BoardVo get(int bno);
 	
-	public int update(BoardVO vo);
+	public int update(BoardVo vo);
 	
 	public int delete(int bno);
 	

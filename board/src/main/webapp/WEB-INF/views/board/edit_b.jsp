@@ -5,7 +5,11 @@
 <jsp:include page="/resources/header/header.jsp"/>
 
 <form method="post" action="/board/edit">
-<input type=text name=bno value="${vo.bno}">
+	<input type=hidden name=pageNo value=${criteria.pageNo}>
+	<input type=hidden name=type value=${criteria.type}>
+	<input type=hidden name=keyword value=${criteria.keyword}>
+	
+	<input type=text name=bno value=${vo.bno }>
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -24,31 +28,21 @@
                         <div class="panel-body">
                             <div class="form-group">
                                 <label>제목</label>
-                                <input class="form-control" value="${vo.title }" name="title">
+                                <input class="form-control" value="${vo.title}" name=title>
+                                
                             </div>
                             <div class="form-group">
                                 <label>내용</label>
-                                <textarea class="form-control" rows="3" name="content">${vo.content }</textarea>
+                                <textarea class="form-control" rows="3" name=content>${vo.content}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>작성자</label>
-                                <input class="form-control" value="${vo.writer }" name="writer">
+                                <input class="form-control" name=writer value="${vo.writer}">
+                                
                             </div>
-                            <div class="form-group">
-                                <label>등록시간</label>
-                                <input class="form-control" value="${vo.regdate }" name="regdate">
-                            </div>
-                            <!-- /.table-responsive -->
-                            <button type="submit" class="btn btn-default" onclick="location.href='edit?bno=${vo.bno}'">수정</button>
-                            <button type="button" class="btn btn-default" onclick="location.href='/board/list'">목록</button>
-                           
-                           <form method="get" name="detailForm">
-                           	<input type=hidden name=bno value=${vo.bno}>
-                           	<input type=hidden name=pageNo value=${criteria.pageNo }>
-                           	<input type=hidden name=type value=${criteria.type }>
-                           	<input type=hidden name=keyword value=${criteria.keyword }>
-                           </form>
-                           
+                            
+                            <button type="submit">수정</button>
+						    
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -56,9 +50,8 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-            <!-- /.row -->
-           
+            
         </div>
         <!-- /#page-wrapper -->
-</form>
+</form>      
 <jsp:include page="/resources/header/bottom.jsp"/>
