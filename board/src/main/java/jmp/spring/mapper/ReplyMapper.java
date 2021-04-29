@@ -16,4 +16,6 @@ public interface ReplyMapper {
 	public List<ReplyVo> getList(@Param("bno") int bno,
 								 @Param("cri") Criteria cri);
 	public int getTotal(int bno);
+	
+	public int updateReplyCnt(int bno);
 }

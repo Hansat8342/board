@@ -76,4 +76,18 @@
 		delete from tbl_board where bno=#{bno}
 	</delete>
 	
+	<insert id="updateBackup">
+		insert into tbl_board_bk 
+		    (select 
+		        seq_board_bk.nextval,
+		        bno,
+		        title,
+		        content,
+		        writer,
+		        regdate,
+		        updatedate,
+		        sysdate 
+		        from tbl_board where bno=#{bno})
+	</insert>
+	
 </mapper>
