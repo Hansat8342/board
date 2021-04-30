@@ -26,6 +26,11 @@
 	<context:component-scan base-package="jmp.spring.controller"></context:component-scan>
 	
 	<context:component-scan base-package="jmp.spring.aop" />
+	
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.support.StandardServletMultipartResolver"> 
+	</beans:bean>
+	
 </beans:beans>
 
 

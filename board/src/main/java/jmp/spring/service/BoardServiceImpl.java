@@ -37,7 +37,7 @@ public class BoardServiceImpl implements BoardService {
 	public int update(BoardVo vo) {
 		// TODO Auto-generated method stub
 		// 게시글을 백업테이블에 저장
-		mapper.updateBackup(vo.getBno());
+		mapper.boardBackup(vo.getBno());
 		return mapper.update(vo);
 	}
 

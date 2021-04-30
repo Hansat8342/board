@@ -27,5 +27,5 @@ public interface BoardMapper {
 	
 	public int getTotal(Criteria cri);
 	
-	public int updateBackup(int bno);
+	public int boardBackup(int bno);
 }
