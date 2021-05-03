@@ -3,18 +3,19 @@ package jmp.spring.controller;
 import java.io.File;
 import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
-
+import jmp.spring.service.AttachFileService;
 import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
 public class FileUploadController {
-
+	
 	@GetMapping("/board/fileUpload")
 	public void fileUploadForm() {
 		
@@ -22,11 +23,13 @@ public class FileUploadController {
 	
 	@PostMapping("/uploadFormAction")
 	public void fileUpload(MultipartFile[] uploadFile) { // 여러개의 파일이 넘어오기 때문에 배열로 받음.
+		
 		for (MultipartFile multipartFile : uploadFile) {
 			
 			File saveFile = new File(multipartFile.getOriginalFilename());
 			
 			try {
+				// 화면으로부터 받은 파일을 서버에 저장
 				multipartFile.transferTo(saveFile);
 			} catch (IllegalStateException e) {
 				// TODO Auto-generated catch block
