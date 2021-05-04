@@ -10,6 +10,11 @@
 <script type="text/javascript">
 	//화면이 준비가 되면 실행
 	$(document).ready(function(){
+		
+		$("#attachNo").on("change", function(){
+			getFileList($("#attachNo").val()); //this.value 도 가능
+		});
+		
 		//id 가 uploadBtn 인 엘리먼트에 클릭 이벤트 부여
 		$("#uploadBtn").on("click",function(){
 			//formData 생성
@@ -28,7 +33,12 @@
 				dataType : 'json',
 				
 				success : function(result){
-					console.log("callBack result", result);
+					console.log("uploadAjax result", result);
+					$("#attachNo").val(result.attachNo);
+					$("#uploadFile").val("");
+					//document.uploadForm.uploadFile.value=""; 도 가능
+					// 파일 저장후 리스트를 호출 합니다.
+					getFileList(result.attachNo);
 				},
 				error : function(){
 					console.log("error");
@@ -36,14 +46,35 @@
 			});
 		});
 	});
+	function getFileList(attachNo){
+		$.ajax({
+			url: '/getFileList/'+attachNo,
+			method:'get',
+			dataType:'json',
+			
+			success: function(result){
+				$.each(result, function(index,item){
+					htmlContent += "<li>"+vo.fileName+"</li>";
+				});
+				$("#fileListView").html(htmlContent);
+				console.log("getFileList", result);
+			}
+		});
+	}
 </script>
 </head>
 <body>
 	<form action="/uploadFormAction" method="post" enctype="multipart/form-data" name="uploadForm">
-		attachNo : <input type="text" name="attachNo" value="0"><br>
-		<input type='file' name='uploadFile' multiple>
-		<button>전송</button>
+		attachNo : <input type="text" id="attachNo" name="attachNo" value="0"><br>
+		<input type='file' id="uploadFile" name='uploadFile' multiple>
 		<button type="button" id="uploadBtn">Ajax전송</button>
+		
+		<!-- 파일 리스트를 받아서 출력 -->
+		<div>
+			<ul id="fileListView">
+				<li>fileName</li>
+			</ul>
+		</div>
 	</form>
 </body>
 </html>
