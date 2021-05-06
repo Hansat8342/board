@@ -17,7 +17,7 @@ public class BoardVo {
 	String regdate;
 	// 수정일시
 	String updatedate;
-	//댓글수
+	// 댓글수
 	String replycnt;
-	
+
 }

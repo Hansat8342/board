@@ -15,22 +15,29 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @Log4j
 public class FileUploadController {
+
+	@Autowired
+	public AttachFileService service;
 	
 	@GetMapping("/board/fileUpload")
 	public void fileUploadForm() {
 		
 	}
 	
+	
 	@PostMapping("/uploadFormAction")
-	public void fileUpload(MultipartFile[] uploadFile) { // 여러개의 파일이 넘어오기 때문에 배열로 받음.
+	public void fileUpload(MultipartFile[] uploadFile, int attachNo) {
 		
-		for (MultipartFile multipartFile : uploadFile) {
+
+		for(MultipartFile multipartFile : uploadFile) {
 			
 			File saveFile = new File(multipartFile.getOriginalFilename());
 			
 			try {
-				// 화면으로부터 받은 파일을 서버에 저장
+				// 화면으로 부터 넘어온 파일을 서버에 저장
 				multipartFile.transferTo(saveFile);
+
+				
 			} catch (IllegalStateException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -39,9 +46,18 @@ public class FileUploadController {
 				e.printStackTrace();
 			}
 			
-		  	log.info("Upload File Name: " +multipartFile.getOriginalFilename());
-		  	log.info("Upload File Size: " +multipartFile.getSize());
-			}
 
+			
+			log.info("=================="+multipartFile.getOriginalFilename());
+			log.info("=================="+multipartFile.getSize());
+			
+		}
 	}
 }
+
+
+
+
+
+
+

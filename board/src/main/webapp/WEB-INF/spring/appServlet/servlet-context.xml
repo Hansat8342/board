@@ -21,15 +21,14 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<beans:bean id="multipartResolver"
+				class="org.springframework.web.multipart.support.StandardServletMultipartResolver"> 
+  	</beans:bean>
+	
+	
 	<context:component-scan base-package="jmp.spring.board" />
 	
 	<context:component-scan base-package="jmp.spring.controller"></context:component-scan>
-	
-	<context:component-scan base-package="jmp.spring.aop" />
-	
-	<beans:bean id="multipartResolver"
-		class="org.springframework.web.multipart.support.StandardServletMultipartResolver"> 
-	</beans:bean>
 	
 </beans:beans>
 

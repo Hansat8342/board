@@ -77,18 +77,27 @@
 	</delete>
 	
 	<insert id="boardBackup">
-		insert into tbl_board_bk 
-		    (select 
-		        seq_board_bk.nextval,
-		        bno,
-		        title,
-		        content,
-		        writer,
-		        regdate,
-		        updatedate,
-		        sysdate 
-		        from tbl_board 
-		        where bno=#{bno})
+	insert into tbl_board_bk
+	(SELECT
+	        seq_board_bk.NEXTVAL,        bno,        title,        content,        writer,        regdate,        updatedate,        sysdate
+	    FROM
+	        tbl_board
+	    WHERE
+	        bno = #{bno})
 	</insert>
-	
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

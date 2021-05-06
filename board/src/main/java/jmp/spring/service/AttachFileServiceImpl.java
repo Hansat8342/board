@@ -9,7 +9,7 @@ import jmp.spring.mapper.AttachFileMapper;
 import jmp.spring.vo.AttachFileVo;
 
 @Service
-public class AttachFileServiceImpl implements AttachFileService{
+public class AttachFileServiceImpl implements AttachFileService {
 
 	@Autowired
 	AttachFileMapper mapper;
@@ -32,6 +32,16 @@ public class AttachFileServiceImpl implements AttachFileService{
 		return mapper.getList(attachNo);
 	}
 
-	
+	@Override
+	public int delete(String uuid, int attachNo) {
+		// TODO Auto-generated method stub
+		return mapper.delete(uuid, attachNo);
+	}
+
+	@Override
+	public AttachFileVo get(String uuid, int attachNo) {
+		// TODO Auto-generated method stub
+		return mapper.get(uuid, attachNo);
+	}
 
 }

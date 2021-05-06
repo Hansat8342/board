@@ -57,7 +57,9 @@ function detail(bno){
                                 <c:forEach var="vo" items="${list}">
                                     <tr class="odd gradeX">
                                         <td>${vo.bno }</td>
-                                        <td onClick=detail(${vo.bno})><a href="#">${vo.title }<c:if test="${vo.replycnt > 0}">[${vo.replycnt }]</c:if></a></td>
+                                        <td onClick=detail(${vo.bno})><a href="#">${vo.title }
+	                                        <c:if test="${vo.replycnt > 0}">
+	                                        [${vo.replycnt }]</c:if></a></td>
                                         <td>${vo.writer }</td>
                                         <td class="center">${vo.regdate }</td>
                                     </tr>

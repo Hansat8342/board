@@ -8,9 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import jmp.spring.vo.BoardVo;
-import jmp.spring.vo.Criteria;
-import jmp.spring.mapper.BoardMapper;
+import jmp.spring.domain.BoardVO;
+import jmp.spring.domain.Criteria;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
@@ -24,36 +23,36 @@ public class BoardMapperTests {
 	
 	@org.junit.Test
 	public void insertTest() {
-		BoardVo board = new BoardVo();
+		BoardVO board = new BoardVO();
 		
 		board.setTitle("Test 제목");
 		board.setContent("Test 내용");
 		board.setWriter("Test 유저");
-		boardMapper.insertBoard(board);
+		boardMapper.insert(board);
 	}
 	
 	@org.junit.Test
 	public void deleteTest() {
-		int count = boardMapper.delete(14); //제거완료 ? 1..* :0
+		int count = boardMapper.delete(14L); //제거완료 ? 1..* :0
 		log.info(count);
 	}
 	
 	@org.junit.Test
 	public void selectTest() {
-		BoardVo board = boardMapper.select(7);
+		BoardVO board = boardMapper.select(7L);
 		log.info(board);
 	}
 	
 	@Test
 	public void getListTest() {
-		List<BoardVo> list = boardMapper.getList();
+		List<BoardVO> list = boardMapper.getList();
 		log.info(list);
 	}
 	
 	@Test
 	public void testUpdate() {
-		BoardVo board = new BoardVo();
-		board.setBno(11);
+		BoardVO board = new BoardVO();
+		board.setBno(11L);
 		board.setTitle("수정된제목");
 		board.setContent("수정된내용");
 		board.setWriter("user00");
@@ -69,7 +68,7 @@ public class BoardMapperTests {
 		 * cri.setPageNum(3); cri.setAmount(10);
 		 */
 		
-		List<BoardVo> list = boardMapper.getListWithPaging(cri);
+		List<BoardVO> list = boardMapper.getListWithPaging(cri);
 		list.forEach(board -> log.info(board.getBno()));
 	}
 	
@@ -84,7 +83,7 @@ public class BoardMapperTests {
 		cri.setKeyword("따뜻");
 		cri.setType("TC");
 		
-		List<BoardVo> list = boardMapper.getListWithPaging(cri);
+		List<BoardVO> list = boardMapper.getListWithPaging(cri);
 		list.forEach(board -> log.info(board));
 	}
 }

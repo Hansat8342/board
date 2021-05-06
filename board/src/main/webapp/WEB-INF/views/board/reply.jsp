@@ -147,6 +147,7 @@ function pageMove(pageNo){
 							      <div class="panel-body">        
 							      
 							        <ul class="chat">
+										
 							        </ul>
 							        <!-- ./ end ul -->
 							      </div>
@@ -162,7 +163,7 @@ function pageMove(pageNo){
 									<!-- /페이징 -->
 								</div>
 <!-- 리스트 호출시 bno와 pageNo 값을 가지고 감!!!!!!! -->							
-<input type="hidden" value="${vo.bno}" id="bno"><br>
+<input type="text" value="${vo.bno}" id="bno"><br>
 <input type="hidden" id="replyPageNo" value="1"><br>
 <input type="hidden" id="rno"><br>
 

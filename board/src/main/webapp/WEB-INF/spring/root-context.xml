@@ -15,7 +15,7 @@
 	<bean id="config" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
 		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"></property>
-		<property name="username" value="JWEB"></property>
+		<property name="username" value="jweb"></property>
 		<property name="password" value="4321"></property>
 	</bean>
 	
@@ -27,19 +27,18 @@
 	  <property name="dataSource" ref="dataSource" />
 	</bean>	
 	
-	<mybatis-spring:scan base-package="jmp.spring.mapper"/>
-	
-	<context:component-scan base-package="jmp.spring.service"></context:component-scan>
-	
-	<context:component-scan base-package="jmp.spring.aop"></context:component-scan>
-	
-	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
-	
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	
- 	<tx:annotation-driven />
+	<tx:annotation-driven/>
+	
+	<mybatis-spring:scan base-package="jmp.spring.mapper"/>
+	
+	<context:component-scan base-package="jmp.spring.service"></context:component-scan>
 
+	<context:component-scan base-package="jmp.spring.aop"></context:component-scan>
+	
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 	
 </beans>
