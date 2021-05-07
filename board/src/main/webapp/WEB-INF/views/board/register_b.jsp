@@ -10,7 +10,7 @@ function regSubmit(){
 
 <jsp:include page="/resources/header/header.jsp"/>
 
-<form method="post" action="/board/register" name="regForm">
+
 
         <div id="page-wrapper">
             <div class="row">
@@ -20,14 +20,18 @@ function regSubmit(){
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
+            
             <div class="row">
                 <div class="col-lg-12">
+                
                     <div class="panel panel-default">
+                    
                         <div class="panel-heading">
                             DataTables Advanced Tables
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
+                        <form method="post" action="/board/register" name="regForm">
                             <div class="form-group">
                                 <label>제목</label>
                                 <input class="form-control" value="${vo.title}" name=title>
@@ -44,6 +48,7 @@ function regSubmit(){
                             </div>
                             
                             <button type="button" onClick="regSubmit()">등록</button>
+						    </form>
 						    
                         </div>
                         <!-- /.panel-body -->
@@ -53,7 +58,8 @@ function regSubmit(){
                 <!-- /.col-lg-12 -->
             </div>
             
+            
         </div>
         <!-- /#page-wrapper -->
-</form>      
+      
 <jsp:include page="/resources/header/bottom.jsp"/>

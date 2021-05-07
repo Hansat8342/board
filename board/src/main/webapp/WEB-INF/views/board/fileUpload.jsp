@@ -95,8 +95,10 @@
 		$.ajax({
 			url : '/attachFileDelete/'+uuid+'/'+attachNo,
 			method : 'get',
-			success : function(res){
-				console.log("delete", res);
+			success : function(result){
+				console.log("delete", result);
+				//파일 저장후 호출
+				getFileList(attachNo);
 			},
 			error : function(){
 				console.log("error");

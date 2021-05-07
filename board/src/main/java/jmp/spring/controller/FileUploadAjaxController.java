@@ -30,7 +30,7 @@ import net.coobird.thumbnailator.Thumbnails;
 
 @RestController
 @Log4j
-public class fileUploadAjaxController {
+public class FileUploadAjaxController {
 	
 	private static final String ROOT_DIR = "c:\\upload\\";
 
@@ -50,7 +50,7 @@ public class fileUploadAjaxController {
 		AttachFileVo vo = service.get(uuid, attachNo);
 		
 		// 서버에 저장된 파일 삭제
-		File file = new File(vo.getSavePath());
+		File file = new File(ROOT_DIR + vo.getSavePath());
 		if(file.exists())
 			file.delete();
 		
