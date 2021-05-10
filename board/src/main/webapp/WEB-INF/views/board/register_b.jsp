@@ -4,7 +4,7 @@
 
 <script>
 function regSubmit(){
-	
+	document.regForm.submit();
 }
 </script>
 
@@ -44,11 +44,13 @@ function regSubmit(){
                             <div class="form-group">
                                 <label>작성자</label>
                                 <input class="form-control" name=writer value="${vo.writer}">
-                                
+                                <input name="attachNo">
                             </div>
-                            
+             
                             <button type="button" onClick="regSubmit()">등록</button>
 						    </form>
+						    
+                        <jsp:include page="fileUpload.jsp"/>
 						    
                         </div>
                         <!-- /.panel-body -->

@@ -4,6 +4,18 @@
 
 <jsp:include page="/resources/header/header.jsp"/>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+//제이쿼리 파일리스트 조회
+$(document).ready(function(){
+	if('${vo.attachNo}' != ''){
+		getFileList('${vo.attachNo}');
+		$("input[name=attachNo]").val('${vo.attachNo}');
+	}
+});
+</script>
+
 <form method="post" action="/board/edit">
 	<input type=hidden name=pageNo value=${criteria.pageNo}>
 	<input type=hidden name=type value=${criteria.type}>
@@ -26,6 +38,7 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
+                        	<form method="post" action="/board/register">
                             <div class="form-group">
                                 <label>제목</label>
                                 <input class="form-control" value="${vo.title}" name=title>
@@ -40,8 +53,10 @@
                                 <input class="form-control" name=writer value="${vo.writer}">
                                 
                             </div>
-                            
+                            <input type=text name=attachNo>
                             <button type="submit">수정</button>
+                            </form>
+                            <jsp:include page="fileUpload.jsp"/>
 						    
                         </div>
                         <!-- /.panel-body -->

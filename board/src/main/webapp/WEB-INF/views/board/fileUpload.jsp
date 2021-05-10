@@ -38,7 +38,10 @@
 				
 				success : function(result){
 					console.log("uploadAjax result",result);
-					$("#attachNo").val(result.attachNo);
+					//$("#attachNo").val(result.attachNo);
+					//name 속성이 attachNo인 엘리먼트의 값을 모두 변경
+					$("input[name=attachNo]").val(result.attachNo);
+					
 					$("#uploadFile").val("");
 					//document.uploadForm.uploadFile.value="";
 					// 파일 저장후 파일 리스트를 호출 합니다.
@@ -106,6 +109,29 @@
 		});
 	}
 </script>
+<style>
+.uploadResult {
+	width: 100%;
+	background-color: gray;
+}
+
+.uploadResult ul {
+	display: flex;
+	flex-flow: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.uploadResult ul li {
+	list-style: none;
+	padding: 10px;
+}
+
+.uploadResult ul li img {
+	width: 100px;
+}
+</style>
+
 </head>
 <body>
 
@@ -113,12 +139,13 @@
 		method="post" 
 		enctype="multipart/form-data"
 		name="uploadForm">
-
-attachNo : <input type="text" name="attachNo" id="attachNo" value="0"><br>
-	<input type="file" name="uploadFile" id="uploadFile" multiple>
-	<button type="button" id="uploadBtn">Ajax 파일 업로드</button>
+	<div id=fileInputArea>
+		attachNo : <input type="text" name="attachNo" id="attachNo" value="0"><br>
+		<input type="file" name="uploadFile" id="uploadFile" multiple>
+		<button type="button" id="uploadBtn">Ajax 파일 업로드</button>
+	</div>
 	<!-- 파일 리스트를 출력 합니다. -->
-	<div>
+	<div class="uploadResult">
 		<ul id = "fileListView">
 			<li>fileName1</li>
 			<li>fileName2</li>

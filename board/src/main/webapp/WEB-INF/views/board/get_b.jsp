@@ -4,6 +4,7 @@
 
 <jsp:include page="/resources/header/header.jsp"/>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script type="text/javascript">
 if('${resMsg}' != ''){
 	alert('${resMsg}');	
@@ -16,6 +17,12 @@ function detailBtn(url){
 	document.detailForm.submit();
 }
 
+// 제이쿼리 파일리스트 조회
+$(document).ready(function(){
+		getFileList('${vo.attachNo}');
+		$("input[name=attachNo]").val('${vo.attachNo}'); //제이쿼리는 괄호만, 중괄호는 서버에서 넘어오는것.
+		$("#fileInputArea").remove();
+});
 </script>
 
         <div id="page-wrapper">
@@ -65,12 +72,12 @@ function detailBtn(url){
 							<input type=hidden name=keyword value=${criteria.keyword}>
 						</form>
                             
+                            <!-- 첨부파일 -->
+                            <jsp:include page="fileUpload.jsp"/>
                             
                             <!-- 댓글 -->
                             <jsp:include page="reply.jsp"/>
                              
-                            
-                            
                         </div>
                         <!-- /.panel-body -->
                     </div>
