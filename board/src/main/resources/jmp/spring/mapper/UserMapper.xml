@@ -10,4 +10,8 @@
 		select * from users where id=#{id} and pwd=#{pwd}
 	</select>
 	
+	<select id="getRole" resultType="String">
+		select role_id from users_role where id=#{id}
+	</select>
+	
 </mapper>

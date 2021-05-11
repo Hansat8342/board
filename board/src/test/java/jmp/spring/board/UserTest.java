@@ -18,6 +18,11 @@ public class UserTest {
 	public UserMapper usermapper;
 	
 	@Test
+	public void userRoleTest() {
+		System.out.println(usermapper.getRole("user01"));
+	}
+	
+	@Test
 	public void userTest() {
 		User user = new User();
 		user.setId("user023");
