@@ -30,4 +30,18 @@ public class UserTest {
 		usermapper.login(user);
 		log.info("====================="+usermapper.login(user));
 	}
+	
+	@Test
+	public void updateTest() {
+		User user = new User();
+		user.setId("user01");
+		user.setSessionkey("789456");
+		usermapper.updateSessionkey(user);
+		log.info("===================="+user.getSessionkey());
+	}
+	
+	@Test
+	public void loginSessionkey() {
+		System.out.println("=======================loginSessionkey"+usermapper.loginSessionkey("789456"));
+	}
 }

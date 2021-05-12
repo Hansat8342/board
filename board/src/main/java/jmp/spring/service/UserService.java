@@ -5,4 +5,8 @@ import jmp.spring.vo.User;
 public interface UserService {
 
 	public User login(User user);
+	
+	public int updateSessionkey(User user);
+	
+	public User loginSessionkey(String sessionkey);
 }

@@ -29,4 +29,19 @@ public class UserServiceImpl implements UserService {
 		return loginUser;
 	}
 
+	@Override
+	public int updateSessionkey(User user) {
+		
+		return mapper.updateSessionkey(user);
+	}
+
+	@Override
+	public User loginSessionkey(String sessionkey) {
+		User user = mapper.loginSessionkey(sessionkey);
+		List<String> role = mapper.getRole(user.getId());
+		//유저 객체에 권한 담아주기
+		user.setRole(role);
+		return user;
+	}
+
 }

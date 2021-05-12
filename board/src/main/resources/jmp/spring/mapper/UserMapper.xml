@@ -14,4 +14,16 @@
 		select role_id from users_role where id=#{id}
 	</select>
 	
+	<!-- 자동로그인시 세션키값과 유효기간을 유저 테이블에 저장합니다. -->
+	<update id="updateSessionkey">
+		update users set sessionkey=#{sessionkey}, sessionlimit=sysdate+7
+		where id=#{id}
+	</update>
+	
+	<select id="loginSessionkey" resultType="jmp.spring.vo.User">
+		select * from users
+		where sessionkey=#{sessionkey}
+		and sessionlimit>sysdate
+	</select>
+	
 </mapper>
