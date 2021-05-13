@@ -54,19 +54,24 @@
                             <fieldset>
                                 <div class="form-group">
                                 	<p id="errorMsgArea"></p>
-                                    <input class="form-control" placeholder="id" name="id" autofocus value="user01">
+                                	<label>ID</label>
+                                    <input class="form-control" placeholder="id" name="id" autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="pwd" type="password" value="1234">
+                                <label>PASSWORD</label>
+                                    <input class="form-control" placeholder="Password" name="pwd" type="password">
                                 </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input name="useCookie" type="checkbox" value="Remember Me">Remember Me
-                                    </label>
+                                <div class="form-group">
+                                <label>이름</label>
+                                    <input class="form-control" placeholder="name" name="name">
                                 </div>
+                                <div class="form-group">
+                                <label>EMAIL</label>
+                                    <input class="form-control" placeholder="email" name="email" type="email" >
+                                </div>
+                                
                                 <!-- Change this to a button or input when using this as a form -->
                                 <button type=submit class="btn btn-lg btn-success btn-block">Login</button>
-                                <p><a href="/member">회원가입</a> &nbsp;&nbsp; <a href="pwdSearch">비밀번호 찾기</a></p>
                             </fieldset>
                         </form>
                     </div>

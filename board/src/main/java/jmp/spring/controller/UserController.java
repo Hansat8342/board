@@ -36,11 +36,12 @@ public class UserController {
 		// 자동로그인 쿠키를 제거해줍니다.
 		// 로그아웃을 하게 되면  더이상 자동로그인을 할 수 가 없습니다.
 		Cookie loginCookie = WebUtils.getCookie(req, "loginCookie");
-		loginCookie.setMaxAge(0);
-		loginCookie.setPath("/");
-		
-		res.addCookie(loginCookie);
-		
+		if(loginCookie != null) {
+			loginCookie.setMaxAge(0);
+			loginCookie.setPath("/");
+			
+			res.addCookie(loginCookie);
+		}
 		return "/login";
 	}
 	
@@ -63,6 +64,16 @@ public class UserController {
 			model.addAttribute("msg", user.getId() + "님 환영합니다.");
 			return "/loginAction";
 		}
+	}
+	
+	@GetMapping("/member")
+	public void member() {
+		
+	}
+	
+	@PostMapping("/registerMember")
+	public void registerMember() {
+		//회원가입 처리
 	}
 	
 }

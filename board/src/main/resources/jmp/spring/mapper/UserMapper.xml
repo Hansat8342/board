@@ -26,4 +26,9 @@
 		and sessionlimit>sysdate
 	</select>
 	
+	<insert id="insertUser">
+		insert into users (id,pwd,enabled,name,email)
+			values(#{id},#{pwd},1,#{name},)
+	</insert>
+	
 </mapper>

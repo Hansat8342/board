@@ -33,8 +33,10 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie"); // 저장한 쿠키값 가져오기
 			if(loginCookie != null) {
 				user = userService.loginSessionkey(loginCookie.getValue());
-				// 로그인 처리 : 세션에 유저 객체를 생성합니다.
-				session.setAttribute("user",user);
+				if(user != null) {					
+					// 로그인 처리 : 세션에 유저 객체를 생성합니다.
+					session.setAttribute("user",user);
+				}
 			}
 			
 		}
@@ -43,15 +45,29 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 		if(user != null) {
 			// USER 권한 체크
 			if(user.hasRole("ROLE_USER")) {
+				// 로그인과 권한이 충족되야만 list 에 접근 가능
 				return true;
 			}else {
 				response.sendRedirect("/login");
 				return false;
 			}
-		}else {
-			response.sendRedirect("/login");
-			return false;
 		}
+		
+		//만약  로그인을 안햇거나 권한이없다면 로그인 페이지로 이동
+		// 원래 요청햇던 페이지와 파라메터를 세션에 저장 >> 세션 삭제
+		System.out.println("uri===="+request.getRequestURI());
+		System.out.println("query====="+ request.getQueryString());
+		String uri = request.getRequestURI(); //기존요청의 uri정보
+		String query = request.getQueryString(); //기존 요청의 파라메터
+		
+		if(query != null) {
+			uri += "?" + query;
+		}
+		session.setAttribute("tmpUri", uri);
+		
+		// 로그인 안했으면
+		response.sendRedirect("/login");
+		return false;
 		
 	}
 
