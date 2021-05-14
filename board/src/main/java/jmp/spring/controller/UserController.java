@@ -5,11 +5,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.util.WebUtils;
 
 import jmp.spring.service.UserService;
@@ -71,9 +74,36 @@ public class UserController {
 		
 	}
 	
-	@PostMapping("/registerMember")
-	public void registerMember() {
+	@PostMapping("/registerMemeber")
+	public String registerMember(User user) {
 		//회원가입 처리
+		try {
+			//오류페이지 이동
+			//회원가입 성공했으면 /loginAction forward
+			int res = service.insertUser(user);
+			if(res>0) {
+				return "forward:/loginAction";
+			}else {
+				return "/error";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "/error";
+		}
+
 	}
+	
+	@GetMapping("/idSearch")
+	public void idSearch() {
+		
+	}
+	
+	@PostMapping("/idSearch")
+	public String idSearch(User user) {
+		String res = service.findId(user);
+		return res;
+			
+	}
+	
 	
 }

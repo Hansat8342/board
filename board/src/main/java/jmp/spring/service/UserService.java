@@ -1,5 +1,7 @@
 package jmp.spring.service;
 
+import javax.servlet.http.HttpServletResponse;
+
 import jmp.spring.vo.User;
 
 public interface UserService {
@@ -14,4 +16,8 @@ public interface UserService {
 	public int updateSessionkey(User user);
 	
 	public User loginSessionkey(String sessionkey);
+	
+	public int insertUser(User user);
+	
+	public String findId(User user);
 }

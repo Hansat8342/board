@@ -33,8 +33,8 @@
 
 </head>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script type="text/javascript">
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
 	$(document).ready(function(){
 		$("#errorMsgArea").text('${msg}');
 	});
@@ -50,19 +50,8 @@
                         <h3 class="panel-title">Please Sign In</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form" action="/registerMemeber" method="post">
+                        <form role="form" action="/idSearch" method="post">
                             <fieldset>
-                                <div class="form-group">
-                                	<p id="errorMsgArea"></p>
-                                	<label>ID</label>
-                                    <input class="form-control" placeholder="id" name="id" autofocus
-                                    pattern = "[0-9A-Za-z]{5,12}" title="5자 이상 12자 이하로 만들어 주세요.">
-                                </div>
-                                <div class="form-group">
-                                <label>PASSWORD</label>
-                                    <input class="form-control" placeholder="Password" name="pwd" type="password"
-                                    pattern = "[0-9A-Za-z]{5,12}" maxlength="12" title="5자 이상 12자 이하로 만들어 주세요.">
-                                </div>
                                 <div class="form-group">
                                 <label>이름</label>
                                     <input class="form-control" placeholder="name" name="name">
@@ -73,7 +62,8 @@
                                 </div>
                                 
                                 <!-- Change this to a button or input when using this as a form -->
-                                <button type=submit class="btn btn-lg btn-success btn-block">회원가입</button>
+                                <button type="submit" class="btn btn-lg btn-success btn-block">아이디 찾기</button>
+                                <button type="button" onclick="history.go(-1);" class="btn btn-lg btn-success btn-block">뒤로가기</button>
                             </fieldset>
                         </form>
                     </div>

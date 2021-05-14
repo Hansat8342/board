@@ -66,7 +66,7 @@
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
                                 <button type=submit class="btn btn-lg btn-success btn-block">Login</button>
-                                <p><a href="/member">회원가입</a> &nbsp;&nbsp; <a href="pwdSearch">비밀번호 찾기</a></p>
+                                <p><a href="/member">회원가입</a> &nbsp;&nbsp; <a href="idSearch">아이디 찾기</a> &nbsp;&nbsp; <a href="pwdSearch">비밀번호 찾기</a></p>
                             </fieldset>
                         </form>
                     </div>

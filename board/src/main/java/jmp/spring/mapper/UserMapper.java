@@ -2,6 +2,8 @@ package jmp.spring.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import jmp.spring.vo.User;
 
 public interface UserMapper {
@@ -17,4 +19,21 @@ public interface UserMapper {
 	public int updateSessionkey(User user);
 	
 	public User loginSessionkey(String sessionkey);
+	
+	/*
+	 * 회원 가입 처리
+	 */
+	public int insertUser(User user);
+	
+	/**
+	 * 회원 권한 등록
+	 * 
+	 * @param id
+	 * @param role
+	 * @return
+	 */
+	public int insertUserRole(@Param("id") String id,
+								@Param("role") String role);
+	
+	public String findId(User user);
 }
