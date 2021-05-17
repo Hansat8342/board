@@ -19,5 +19,9 @@ public interface UserService {
 	
 	public int insertUser(User user);
 	
-	public String findId(User user);
+	public User findId(User user);
+	
+	public User findPwd(User user);
+	
+	public void sendEmail(User user);
 }

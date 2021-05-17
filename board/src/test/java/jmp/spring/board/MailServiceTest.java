@@ -24,11 +24,11 @@ public class MailServiceTest {
 	@org.junit.Test
 	public void Test() {
 		log.info("==================="+prop);
-//		MailService ms = new MailService();
-//
-//		log.info("================================");
-//		//메일 전송 테스트
-//		ms.welcomeMailSend();
-//		log.info("================================");
+		MailService ms = new MailService();
+
+		log.info("================================");
+		//메일 전송 테스트
+//		ms.findPwd();
+		log.info("================================");
 	}
 }

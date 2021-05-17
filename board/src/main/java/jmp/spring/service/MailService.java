@@ -17,6 +17,8 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import jmp.spring.vo.User;
+
 @Component
 public class MailService {		
 
@@ -26,17 +28,18 @@ public class MailService {
 		
 	}
 	
-	public void welcomeMailSend() {
+	public void findPwd(User user) {
 		// 메일 설정 정보
-//		Properties prop = System.getProperties();
-//		prop.put("mail.smtp.starttls.enable", "true"); // 로그인시 TLS를 사용할 것인지 설정
-//		prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");	
-//		prop.put("mail.smtp.host", "smtp.gmail.com");// SMTP서버
-//		prop.put("mail.smtp.auth", "true");// SMTP 서버의 인증 사용
-//		prop.put("mail.smtp.port", "587");// TLS 포트번호= 587, SSL 포트번호= 465
+		//Properties prop = System.getProperties();
+		Properties prop = new Properties();
+		prop.put("mail.smtp.ssl.enable", "true"); // 로그인시 TLS를 사용할 것인지 설정
+		prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");	
+		prop.put("mail.smtp.host", "smtp.gmail.com");// SMTP서버
+		prop.put("mail.smtp.auth", "true");// SMTP 서버의 인증 사용
+		prop.put("mail.smtp.port", "465");// TLS 포트번호= 587, SSL 포트번호= 465
 		
-		String mail_id = prop.getProperty("mail.id");
-		String mail_pw = prop.getProperty("mail.pw");
+		String mail_id = "junghyunmin9729@gmail.com";
+		String mail_pw = "roslcnanzivkhaxo";
 		
 		// 구글 계정 인증용 ID/PW 세팅
 		Authenticator auth = new MailAuth(mail_id, mail_pw);
@@ -55,9 +58,9 @@ public class MailService {
 			msg.setRecipient(Message.RecipientType.TO, to);
 			
             // 메일 제목
-			msg.setSubject("환영합니다.", "UTF-8");
+			msg.setSubject("비밀번호 찾기의 결과 입니다.", "UTF-8");
 			// 메일 내용
-			msg.setText("가입을 축하드립니다.\n인증번호는 1234 입니다.", "UTF-8");
+			msg.setText("비밀번호 찾기 결과 입니다.\n"+user.getName()+"님의 비밀번호는 "+ user.getPwd() +"\n다음부터는 조심해 주세요.", "UTF-8");
 			
             // 메일 발송
 			Transport.send(msg);
@@ -87,5 +90,6 @@ class MailAuth extends Authenticator {
 	public PasswordAuthentication getPasswordAuthentication() {
 		return pa;
 	}
+	
 }
 

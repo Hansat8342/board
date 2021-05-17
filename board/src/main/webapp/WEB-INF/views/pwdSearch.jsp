@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 
 <head>
@@ -34,10 +35,14 @@
 </head>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script type="text/javascript">
+<script>
 	$(document).ready(function(){
 		$("#errorMsgArea").text('${msg}');
 	});
+	function closethewindow(){
+		self.close();
+	}
+	
 </script>
 
 <body>
@@ -50,22 +55,11 @@
                         <h3 class="panel-title">Please Sign In</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form" action="/registerMemeber" method="post">
+                        <form role="form" action="/pwdSearch" method="post">
                             <fieldset>
                                 <div class="form-group">
-                                	<p id="errorMsgArea"></p>
-                                	<label>ID</label>
-                                    <input class="form-control" placeholder="id" name="id" autofocus
-                                    pattern = "[0-9A-Za-z]{5,12}" title="5자 이상 12자 이하로 만들어 주세요.">
-                                </div>
-                                <div class="form-group">
-                                <label>PASSWORD</label>
-                                    <input class="form-control" placeholder="Password" name="pwd" type="password"
-                                    pattern = "[0-9A-Za-z]{5,12}" maxlength="12" title="5자 이상 12자 이하로 만들어 주세요.">
-                                </div>
-                                <div class="form-group">
-                                <label>이름</label>
-                                    <input class="form-control" placeholder="name" name="name">
+                                <label>ID</label>
+                                    <input class="form-control" placeholder="id" name="id">
                                 </div>
                                 <div class="form-group">
                                 <label>EMAIL</label>
@@ -73,8 +67,27 @@
                                 </div>
                                 
                                 <!-- Change this to a button or input when using this as a form -->
-                                <button type=submit class="btn btn-lg btn-success btn-block">회원가입</button>
+                                <button type="submit" name="findBtn" class="btn btn-lg btn-success btn-block">비밀번호 찾기</button>
+                                <button type="button" onclick="history.go(-1);" class="btn btn-lg btn-success btn-block">뒤로가기</button>
+                                <!-- 이름과 이메일이 일치하지 않을 때-->
+								<c:if test="${check == 1}">
+									<script>
+										opener.document.findform.name.value = "";
+										opener.document.findform.phone.value = "";
+									</script>
+									<label>일치하는 정보가 존재하지 않습니다.</label>
+								</c:if>
+						
+								<!-- 이름과 비밀번호가 일치하지 않을 때 -->
+								<c:if test="${check == 0 }">
+								<label>찾으시는 비밀번호는 메일로 발송했습니다.</label>
+								<div class="form-label-group">
+										<input class="btn btn-lg btn-secondary btn-block text-uppercase"
+											type="button" value="OK" onclick="closethewindow()">
+									</div>
+								</c:if>
                             </fieldset>
+                            
                         </form>
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 
 <head>
@@ -33,11 +34,14 @@
 
 </head>
 
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
 	$(document).ready(function(){
 		$("#errorMsgArea").text('${msg}');
 	});
+	function closethewindow(){
+		self.close();
+	}
 </script>
 
 <body>
@@ -64,7 +68,25 @@
                                 <!-- Change this to a button or input when using this as a form -->
                                 <button type="submit" class="btn btn-lg btn-success btn-block">아이디 찾기</button>
                                 <button type="button" onclick="history.go(-1);" class="btn btn-lg btn-success btn-block">뒤로가기</button>
+                                <!-- 이름과 이메일이 일치하지 않을 때-->
+								<c:if test="${check == 1}">
+									<script>
+										opener.document.findform.name.value = "";
+										opener.document.findform.phone.value = "";
+									</script>
+									<label>일치하는 정보가 존재하지 않습니다.</label>
+								</c:if>
+						
+								<!-- 이름과 비밀번호가 일치하지 않을 때 -->
+								<c:if test="${check == 0 }">
+								<label>찾으시는 아이디는' ${id}' 입니다.</label>
+								<div class="form-label-group">
+										<input class="btn btn-lg btn-secondary btn-block text-uppercase"
+											type="button" value="OK" onclick="closethewindow()">
+									</div>
+								</c:if>
                             </fieldset>
+                            
                         </form>
                     </div>
                 </div>

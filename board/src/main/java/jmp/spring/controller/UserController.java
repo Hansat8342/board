@@ -99,11 +99,38 @@ public class UserController {
 	}
 	
 	@PostMapping("/idSearch")
-	public String idSearch(User user) {
-		String res = service.findId(user);
-		return res;
-			
+	public String idSearch(User user , Model model) {
+		User vo = service.findId(user);
+		
+		if(vo == null) { 
+			model.addAttribute("check", 1);
+		} else { 
+			model.addAttribute("check", 0);
+			model.addAttribute("id", vo.getId());
+		}
+		
+		return "/idSearch";
 	}
 	
+	@GetMapping("/pwdSearch")
+	public void pwSearch() {
+		
+	}
+	
+	@PostMapping("/pwdSearch")
+	public String pwSearch(User user , Model model) {
+		User vo = service.findPwd(user);
+		
+		if(vo == null) { 
+			model.addAttribute("check", 1);
+		} else { 
+			model.addAttribute("check", 0);
+			model.addAttribute("pwd", vo.getPwd());
+			model.addAttribute("email", vo.getEmail());
+			service.sendEmail(vo);
+		}
+		
+		return "/pwdSearch";
+	}	
 	
 }

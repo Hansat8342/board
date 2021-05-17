@@ -8,6 +8,8 @@ import jmp.spring.vo.User;
 
 public interface UserMapper {
 	public User login(User user);
+
+	public User login_name(User user);
 	
 	public List<String> getRole(String id);
 	
@@ -35,5 +37,7 @@ public interface UserMapper {
 	public int insertUserRole(@Param("id") String id,
 								@Param("role") String role);
 	
-	public String findId(User user);
+	public User findId(User user);
+	
+	public User findPwd(User user);
 }
