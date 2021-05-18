@@ -46,4 +46,10 @@
 	<select id="findPwd" resultType="String">
 		select pwd from users where id=#{id} and email=#{email}
 	</select>
+	
+	<update id="updatePwd">
+		update users set pwd=#{pwd}
+		where id=#{id}
+	</update>
+	
 </mapper>

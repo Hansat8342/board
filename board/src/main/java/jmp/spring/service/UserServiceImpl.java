@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import java.util.UUID;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -45,8 +46,10 @@ public class UserServiceImpl implements UserService {
 		if(loginUser != null) {
 			// 비밀번호를 비교하는 로직 추가
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-			// 따라서 여기 비밀번호 매치할때 조심해야 한다. 화면에서 넘어온 정보와 데이터베이스의 암호화된 비밀번호를 매치 시켜봐야한다.
-			if(!encoder.matches(vo.getPwd(), encoder.encode(loginUser.getPwd()))) {
+			// 따라서 여기 비밀번호 매치할때 조심해야 한다.
+			// 화면에서 넘어온 정보와 데이터베이스의 암호화된 비밀번호를 매치 시켜봐야한다.
+//			if(!encoder.matches(vo.getPwd(), encoder.encode(loginUser.getPwd()))) {
+			if(!encoder.matches(vo.getPwd(), loginUser.getPwd())) {
 				// 비밀번호가 틀릴경우 return null반환 = user 객체 null
 				return null;
 			}
@@ -93,9 +96,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findId(User user) {
 		User loginUser = mapper.login_name(user);
-		
-		if(loginUser.getName().equals(user.getName()) && loginUser.getEmail().equals(user.getEmail())) {
-			return loginUser;
+		if(loginUser!=null) {
+			if(loginUser.getName().equals(user.getName()) && loginUser.getEmail().equals(user.getEmail())) {
+				return loginUser;
+				
+			}
 		}
 		return null;
 	}
@@ -104,14 +109,18 @@ public class UserServiceImpl implements UserService {
 	public User findPwd(User user) {
 		User loginUser = mapper.login(user);
 		
-		if(loginUser.getId().equals(user.getId()) && loginUser.getEmail().equals(user.getEmail())) {
-			return loginUser;
+		if(loginUser!=null) {
+			if(loginUser.getId().equals(user.getId()) && loginUser.getEmail().equals(user.getEmail())) {
+				return loginUser;
+				
+			}
 		}
 		return null;
+	
 	}
 
 	@Override
-	public void sendEmail(User user) {
+	public String sendEmail(User user) {
 		// 메일 설정 정보
 				//Properties prop = System.getProperties();
 				Properties prop = new Properties();
@@ -130,6 +139,8 @@ public class UserServiceImpl implements UserService {
 				Session session = Session.getDefaultInstance(prop, auth);
 				MimeMessage msg = new MimeMessage(session);
 
+				String pw = UUID.randomUUID().toString().substring(0,7);
+				
 				try {
 					// 보내는 날짜 지정
 					msg.setSentDate(new Date());
@@ -140,10 +151,12 @@ public class UserServiceImpl implements UserService {
 					InternetAddress to = new InternetAddress("junghyunmin9729@gmail.com");
 					msg.setRecipient(Message.RecipientType.TO, to);
 					
+					
+					
 		            // 메일 제목
 					msg.setSubject("비밀번호 찾기의 결과 입니다.", "UTF-8");
 					// 메일 내용
-					msg.setText("비밀번호 찾기 결과 입니다.\n"+user.getName()+"님의 비밀번호는 "+ user.getPwd() +"\n다음부터는 조심해 주세요.", "UTF-8");
+					msg.setText("비밀번호 찾기 결과 입니다.\n"+user.getName()+"님의 비밀번호는 "+ pw +"\n다음부터는 조심해 주세요.", "UTF-8");
 					
 		            // 메일 발송
 					Transport.send(msg);
@@ -155,6 +168,13 @@ public class UserServiceImpl implements UserService {
 				} catch (UnsupportedEncodingException e) {
 					System.out.println("UnsupportedEncodingException : " + e.getMessage());
 				}
+				return pw;
+	}
+
+	@Override
+	public int updatePwd(User user) {
+		
+		return mapper.updatePwd(user);
 	}
 
 

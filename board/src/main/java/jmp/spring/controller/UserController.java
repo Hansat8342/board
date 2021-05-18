@@ -4,9 +4,11 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.sound.sampled.AudioFormat.Encoding;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -127,7 +129,13 @@ public class UserController {
 			model.addAttribute("check", 0);
 			model.addAttribute("pwd", vo.getPwd());
 			model.addAttribute("email", vo.getEmail());
-			service.sendEmail(vo);
+			String pw = service.sendEmail(vo);
+			System.out.println("=======================PW : "+pw);
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			vo.setPwd(encoder.encode(pw));
+			service.updatePwd(vo);
+			
+			
 		}
 		
 		return "/pwdSearch";

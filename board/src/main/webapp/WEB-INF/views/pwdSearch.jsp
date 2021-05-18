@@ -71,20 +71,12 @@
                                 <button type="button" onclick="history.go(-1);" class="btn btn-lg btn-success btn-block">뒤로가기</button>
                                 <!-- 이름과 이메일이 일치하지 않을 때-->
 								<c:if test="${check == 1}">
-									<script>
-										opener.document.findform.name.value = "";
-										opener.document.findform.phone.value = "";
-									</script>
 									<label>일치하는 정보가 존재하지 않습니다.</label>
 								</c:if>
 						
 								<!-- 이름과 비밀번호가 일치하지 않을 때 -->
 								<c:if test="${check == 0 }">
 								<label>찾으시는 비밀번호는 메일로 발송했습니다.</label>
-								<div class="form-label-group">
-										<input class="btn btn-lg btn-secondary btn-block text-uppercase"
-											type="button" value="OK" onclick="closethewindow()">
-									</div>
 								</c:if>
                             </fieldset>
                             

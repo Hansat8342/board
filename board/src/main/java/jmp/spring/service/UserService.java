@@ -23,5 +23,7 @@ public interface UserService {
 	
 	public User findPwd(User user);
 	
-	public void sendEmail(User user);
+	public String sendEmail(User user);
+	
+	public int updatePwd(User user);
 }

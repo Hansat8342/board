@@ -40,4 +40,6 @@ public interface UserMapper {
 	public User findId(User user);
 	
 	public User findPwd(User user);
+	
+	public int updatePwd(User user);
 }
