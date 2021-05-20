@@ -42,4 +42,6 @@ public interface UserMapper {
 	public User findPwd(User user);
 	
 	public int updatePwd(User user);
+	
+	public User checkId(String id);
 }

@@ -177,6 +177,12 @@ public class UserServiceImpl implements UserService {
 		return mapper.updatePwd(user);
 	}
 
+	@Override
+	public User checkId(String id) {
+		
+		return mapper.checkId(id);
+	}
+
 
 
 

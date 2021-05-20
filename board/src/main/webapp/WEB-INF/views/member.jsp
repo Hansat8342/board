@@ -35,9 +35,75 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script type="text/javascript">
-	$(document).ready(function(){
-		$("#errorMsgArea").text('${msg}');
+$(document).ready(function(){
+		
+		$("#registerBtn").on("click", function(){
+			
+			let id = $("input[name=id]").val();
+			if($.isEmptyObject(id)){
+				alert("id를 입력해주세요");
+				return;
+			}
+			
+			// 중복체크가 성공적으로 진행되면 datavalue = true
+			// 중복 체크가 제대로 되어있지 않은경우 중복체크 메세지를 출력 dataValue = false
+			// 등록 가능한 아이디 이면 datavalue = true
+			if(!$("input[name=id]").prop("dataValue")){
+				alert("id 중복검사를 해주세요");
+				return false;
+			}
+			if(checkPassword()){
+				return false;
+			};
+			
+			$("#registerForm").submit();
+		});
+		
+		// #idCheck : 태그 <>~</>의 id 값이 idCheck => 중복체크 버튼
+		$("#idCheck").on("click", function(){
+			
+			// 변수 선언 var -> let var는 메모리 누수가 있다고 함.
+			// id값 #id name id 선택하는 명령어.
+			let id = $("input[name=id]").val();
+			if($.isEmptyObject(id)){
+				alert("id를 입력해주세요");
+				return;
+			}
+			
+			//아이디 체크 여부
+			//초기화
+			$("input[name=id]").prop("dataValue",false);
+			
+			$.ajax({
+				url : '/checkId/'+id,
+				method : 'get',
+				dataType : 'json',
+				success : function(data){
+					//등록 가능한 아이디 인 경우
+					if(data){
+						console.log(data);
+						
+						// 중복체크가 성공 처리 -> 회원가입 버튼 클릭시 dataValue값 확인
+						// 회원가입 버튼 클릭시 중복처리를 했다고 저장.
+						// 속성값 추가
+						$("input[name=id]").prop("dataValue",true);
+						alert("사용 가능한 아이디 입니다");
+						
+					} else{//이미 등록된 아이디인 경우
+						alert("id가 중복되었습니다");
+					}
+				}
+			});
+		});	
+		
+		
 	});
+
+	function checkPassword(){
+		if(!($("input[name=pwd]").val() === $("input[name=pwdCheck]").val())){
+			 alert("비밀번호가 일치하지 않습니다.");
+		} 
+	}
 </script>
 
 <body>
@@ -57,6 +123,7 @@
                                 	<label>ID</label>
                                     <input class="form-control" placeholder="id" name="id" autofocus
                                     pattern = "[0-9A-Za-z]{5,12}" title="5자 이상 12자 이하로 만들어 주세요.">
+                                    <button class="form-control" id="idCheck" type="button" >중복 확인</button>
                                 </div>
                                 <div class="form-group">
                                 <label>PASSWORD</label>

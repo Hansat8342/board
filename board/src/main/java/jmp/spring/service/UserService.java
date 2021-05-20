@@ -26,4 +26,6 @@ public interface UserService {
 	public String sendEmail(User user);
 	
 	public int updatePwd(User user);
+	
+	public User checkId(String id);
 }

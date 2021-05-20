@@ -52,4 +52,8 @@
 		where id=#{id}
 	</update>
 	
+	<select id="checkId" resultType="jmp.spring.vo.User">
+		select * from users where id=#{id}
+	</select>
+	
 </mapper>
