@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import jmp.spring.vo.MenuVo;
 import jmp.spring.vo.User;
 
 public interface UserMapper {
@@ -44,4 +45,6 @@ public interface UserMapper {
 	public int updatePwd(User user);
 	
 	public User checkId(String id);
+	
+	public List<MenuVo> getMenu();
 }

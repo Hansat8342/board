@@ -1,7 +1,10 @@
 package jmp.spring.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 
+import jmp.spring.vo.MenuVo;
 import jmp.spring.vo.User;
 
 public interface UserService {
@@ -28,4 +31,6 @@ public interface UserService {
 	public int updatePwd(User user);
 	
 	public User checkId(String id);
+	
+	public List<MenuVo> getMenu();
 }

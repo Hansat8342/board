@@ -23,6 +23,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import jmp.spring.mapper.UserMapper;
+import jmp.spring.vo.MenuVo;
 import jmp.spring.vo.User;
 
 @Service
@@ -48,7 +49,7 @@ public class UserServiceImpl implements UserService {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			// 따라서 여기 비밀번호 매치할때 조심해야 한다.
 			// 화면에서 넘어온 정보와 데이터베이스의 암호화된 비밀번호를 매치 시켜봐야한다.
-//			if(!encoder.matches(vo.getPwd(), encoder.encode(loginUser.getPwd()))) {
+//			if(!encoder.matches(vo.getPwd(), encoder.encode(loginUser.getPwd()))) { 화면에서 받아온 pwd 
 			if(!encoder.matches(vo.getPwd(), loginUser.getPwd())) {
 				// 비밀번호가 틀릴경우 return null반환 = user 객체 null
 				return null;
@@ -181,6 +182,11 @@ public class UserServiceImpl implements UserService {
 	public User checkId(String id) {
 		
 		return mapper.checkId(id);
+	}
+
+	@Override
+	public List<MenuVo> getMenu() {
+		return mapper.getMenu();
 	}
 
 

@@ -34,6 +34,8 @@
 	<beans:bean id="authInterceptor" class="jmp.spring.interceptor.AuthInterceptor"></beans:bean>
 	
 	<beans:bean id="loginInterceptor" class="jmp.spring.interceptor.LoginInterceptor"></beans:bean>
+	
+	<beans:bean id="menuInterceptor" class="jmp.spring.interceptor.MenuInterceptor"></beans:bean>
 	<!--interceptors를 추가 하여 path에 해당 하는 url이 호출될 경우 beans에 등록된 interceptor를 실행 합니다.-->
 	<interceptors>
 		<interceptor>
@@ -43,6 +45,10 @@
 		<interceptor>
 			<mapping path="/loginAction"/>
 			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/**"/>
+			<beans:ref bean="menuInterceptor"/>
 		</interceptor>
 	</interceptors>
 	
